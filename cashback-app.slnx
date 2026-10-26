@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="cashback-domain/cashback-domain.csproj" />
+  <Project Path="cashback-maui/cashback-maui.csproj" />
+</Solution>
