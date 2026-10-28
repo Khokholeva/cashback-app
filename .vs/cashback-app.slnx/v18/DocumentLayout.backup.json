@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{45DE0836-E678-B26A-5E4F-76B4536879D4}|cashback-domain\\cashback-domain.csproj|c:\\users\\pangolin\\desktop\\cashback-app\\cashback-domain\\entities\\shop\\ishopentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{45DE0836-E678-B26A-5E4F-76B4536879D4}|cashback-domain\\cashback-domain.csproj|solutionrelative:cashback-domain\\entities\\shop\\ishopentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{45DE0836-E678-B26A-5E4F-76B4536879D4}|cashback-domain\\cashback-domain.csproj|c:\\users\\pangolin\\desktop\\cashback-app\\cashback-domain\\entities\\bank card\\ibankcardentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{45DE0836-E678-B26A-5E4F-76B4536879D4}|cashback-domain\\cashback-domain.csproj|solutionrelative:cashback-domain\\entities\\bank card\\ibankcardentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -42,10 +46,6 @@
       "RelativeMoniker": "D:0:0:{45DE0836-E678-B26A-5E4F-76B4536879D4}|cashback-domain\\cashback-domain.csproj|solutionrelative:cashback-domain\\entities\\discount card\\idiscountcardentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{45DE0836-E678-B26A-5E4F-76B4536879D4}|cashback-domain\\cashback-domain.csproj|c:\\users\\pangolin\\desktop\\cashback-app\\cashback-domain\\entities\\shop\\ishopentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{45DE0836-E678-B26A-5E4F-76B4536879D4}|cashback-domain\\cashback-domain.csproj|solutionrelative:cashback-domain\\entities\\shop\\ishopentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{B1902743-E85D-9F1C-C20F-DB10A829892A}|cashback-maui\\cashback-maui.csproj|c:\\users\\pangolin\\desktop\\cashback-app\\cashback-maui\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B1902743-E85D-9F1C-C20F-DB10A829892A}|cashback-maui\\cashback-maui.csproj|solutionrelative:cashback-maui\\mauiprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -57,24 +57,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "IProductTracker.cs",
-              "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\IProductTracker.cs",
-              "RelativeDocumentMoniker": "cashback-domain\\Entities\\IProductTracker.cs",
-              "ToolTip": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\IProductTracker.cs",
-              "RelativeToolTip": "cashback-domain\\Entities\\IProductTracker.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:38:22.188Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "DiscountMeasurementUnit.cs",
               "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Enums\\DiscountMeasurementUnit.cs",
               "RelativeDocumentMoniker": "cashback-domain\\Enums\\DiscountMeasurementUnit.cs",
@@ -82,12 +69,11 @@
               "RelativeToolTip": "cashback-domain\\Enums\\DiscountMeasurementUnit.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:34:42.409Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:34:42.409Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "IPromotionEntity.cs",
               "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\Coupon or Promocde\\IPromotionEntity.cs",
               "RelativeDocumentMoniker": "cashback-domain\\Entities\\Coupon or Promocde\\IPromotionEntity.cs",
@@ -95,12 +81,11 @@
               "RelativeToolTip": "cashback-domain\\Entities\\Coupon or Promocde\\IPromotionEntity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:31:13.607Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:31:13.607Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Bank.cs",
               "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Enums\\Bank.cs",
               "RelativeDocumentMoniker": "cashback-domain\\Enums\\Bank.cs",
@@ -108,12 +93,11 @@
               "RelativeToolTip": "cashback-domain\\Enums\\Bank.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:27:48.183Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:27:48.183Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "CashBackCategory.cs",
               "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Enums\\CashBackCategory.cs",
               "RelativeDocumentMoniker": "cashback-domain\\Enums\\CashBackCategory.cs",
@@ -121,25 +105,24 @@
               "RelativeToolTip": "cashback-domain\\Enums\\CashBackCategory.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:25:14.189Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:25:14.189Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "IBankCardEntity.cs",
               "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\Bank Card\\IBankCardEntity.cs",
               "RelativeDocumentMoniker": "cashback-domain\\Entities\\Bank Card\\IBankCardEntity.cs",
               "ToolTip": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\Bank Card\\IBankCardEntity.cs",
               "RelativeToolTip": "cashback-domain\\Entities\\Bank Card\\IBankCardEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-26T17:23:58.754Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "readme.txt",
               "DocumentMoniker": "C:\\Users\\Pangolin\\.nuget\\packages\\barcode\\2026.10.10\\readme.txt",
               "RelativeDocumentMoniker": "..\\..\\.nuget\\packages\\barcode\\2026.10.10\\readme.txt",
@@ -147,12 +130,11 @@
               "RelativeToolTip": "..\\..\\.nuget\\packages\\barcode\\2026.10.10\\readme.txt",
               "ViewState": "AgIAABUAAAAAAAAAAAAAAEcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2026-10-26T17:15:48.804Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:15:48.804Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "IDiscountCardEntity.cs",
               "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\Discount Card\\IDiscountCardEntity.cs",
               "RelativeDocumentMoniker": "cashback-domain\\Entities\\Discount Card\\IDiscountCardEntity.cs",
@@ -160,12 +142,11 @@
               "RelativeToolTip": "cashback-domain\\Entities\\Discount Card\\IDiscountCardEntity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:11:04.239Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:11:04.239Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "ShopCategory.cs",
               "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Enums\\ShopCategory.cs",
               "RelativeDocumentMoniker": "cashback-domain\\Enums\\ShopCategory.cs",
@@ -173,12 +154,36 @@
               "RelativeToolTip": "cashback-domain\\Enums\\ShopCategory.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:09:50.543Z",
+              "WhenOpened": "2026-10-26T17:09:50.543Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "IShopEntity.cs",
+              "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\Shop\\IShopEntity.cs",
+              "RelativeDocumentMoniker": "cashback-domain\\Entities\\Shop\\IShopEntity.cs",
+              "ToolTip": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\Shop\\IShopEntity.cs",
+              "RelativeToolTip": "cashback-domain\\Entities\\Shop\\IShopEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA1AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-26T17:04:32.333Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
+              "Title": "IProductTracker.cs",
+              "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\IProductTracker.cs",
+              "RelativeDocumentMoniker": "cashback-domain\\Entities\\IProductTracker.cs",
+              "ToolTip": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\IProductTracker.cs",
+              "RelativeToolTip": "cashback-domain\\Entities\\IProductTracker.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-26T17:38:22.188Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "IEntity.cs",
               "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\IEntity.cs",
               "RelativeDocumentMoniker": "cashback-domain\\Entities\\IEntity.cs",
@@ -186,21 +191,7 @@
               "RelativeToolTip": "cashback-domain\\Entities\\IEntity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAkAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T16:59:09.167Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "IShopEntity.cs",
-              "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\Shop\\IShopEntity.cs",
-              "RelativeDocumentMoniker": "cashback-domain\\Entities\\Shop\\IShopEntity.cs",
-              "ToolTip": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\Shop\\IShopEntity.cs",
-              "RelativeToolTip": "cashback-domain\\Entities\\Shop\\IShopEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:04:32.333Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T16:59:09.167Z"
             },
             {
               "$type": "Document",
