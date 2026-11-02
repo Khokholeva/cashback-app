@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using cashback_domain.Entities.Shop;
 
-namespace cashback_domain.Entities
+namespace cashback_domain.Entities.ProductTracker
 {
     internal interface IProductTracker : IEntity<int>
     {

@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using cashback_domain.Entities.MCC;
 using cashback_domain.Enums;
 
 namespace cashback_domain.Entities.Bank_Card
 {
-    internal interface IBankCardEntity : IEntity<int>
+    internal interface IBankCardEntity : INotificationEntity<int>
     {
-        public CashBackCategory[] CashBackCategories { get; init; }
+        public IMCC[] CashBackCategories { get; init; }
         public Bank Bank { get; init; }
         public string AdditionalInfo { get; init; }
     }
