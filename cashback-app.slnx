@@ -1,0 +1,9 @@
+<Solution>
+  <Project Path="Android-UI/Android-UI.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="cashback-application/cashback-application.csproj" />
+  <Project Path="cashback-domain/cashback-domain.csproj" />
+  <Project Path="cashback-infrastructure/cashback-infrastructure.csproj" Id="b24d891d-ac67-4dfe-a0d2-81aaf91fe4b0" />
+  <Project Path="cashback-maui/cashback-maui.csproj" />
+</Solution>

@@ -73,8 +73,7 @@
               "RelativeToolTip": "cashback-domain\\Entities\\MCC\\IMCC.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-02T11:15:03.134Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-02T11:15:03.134Z"
             },
             {
               "$type": "Document",
@@ -86,8 +85,7 @@
               "RelativeToolTip": "cashback-domain\\Entities\\INotificationEntity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-11-02T11:13:13.357Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-11-02T11:13:13.357Z"
             },
             {
               "$type": "Document",
@@ -99,8 +97,7 @@
               "RelativeToolTip": "cashback-domain\\Enums\\DiscountMeasurementUnit.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:34:42.409Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:34:42.409Z"
             },
             {
               "$type": "Document",
@@ -112,8 +109,7 @@
               "RelativeToolTip": "cashback-domain\\Entities\\Coupon or Promocde\\IPromotionEntity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:31:13.607Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:31:13.607Z"
             },
             {
               "$type": "Document",
@@ -125,8 +121,7 @@
               "RelativeToolTip": "cashback-domain\\Enums\\Bank.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:27:48.183Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:27:48.183Z"
             },
             {
               "$type": "Document",
@@ -138,8 +133,7 @@
               "RelativeToolTip": "cashback-domain\\Entities\\Cards\\Bank Card\\IBankCardEntity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:23:58.754Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:23:58.754Z"
             },
             {
               "$type": "Document",
@@ -151,8 +145,7 @@
               "RelativeToolTip": "cashback-domain\\Entities\\Cards\\Discount Card\\IDiscountCardEntity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:11:04.239Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:11:04.239Z"
             },
             {
               "$type": "Document",
@@ -164,8 +157,7 @@
               "RelativeToolTip": "cashback-domain\\Entities\\ProductTracker\\IProductTracker.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:38:22.188Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:38:22.188Z"
             },
             {
               "$type": "Document",
@@ -175,7 +167,7 @@
               "RelativeDocumentMoniker": "cashback-domain\\Entities\\IEntity.cs",
               "ToolTip": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\IEntity.cs",
               "RelativeToolTip": "cashback-domain\\Entities\\IEntity.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-10-26T16:59:09.167Z",
               "EditorCaption": ""
@@ -190,8 +182,7 @@
               "RelativeToolTip": "cashback-domain\\Enums\\ShopCategory.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:09:50.543Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:09:50.543Z"
             },
             {
               "$type": "Document",
@@ -215,8 +206,7 @@
               "RelativeToolTip": "cashback-domain\\Entities\\Shop\\IShopEntity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-10-26T17:04:32.333Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-10-26T17:04:32.333Z"
             },
             {
               "$type": "Document",
