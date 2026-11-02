@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DB\" />
     <Folder Include="Barcode\" />
+    <Folder Include="DB\LocalDB\" />
     <Folder Include="Server\" />
   </ItemGroup>
 
