@@ -8,14 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BarCode" Version="2026.10.10" />
     <PackageReference Include="System.Data.SQLite" Version="2.0.4" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
     <PackageReference Include="System.Data.SQLite.Linq" Version="1.0.119" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Barcode\" />
     <Folder Include="DB\LocalDB\" />
     <Folder Include="Server\" />
   </ItemGroup>

@@ -1,4 +1,6 @@
-﻿namespace cashback_maui
+﻿using ZXing.Net.Maui.Controls;
+
+namespace cashback_maui
 {
     public partial class MainPage : ContentPage
     {
@@ -7,6 +9,25 @@
         public MainPage()
         {
             InitializeComponent();
+
+            //сканер баркодов - добавить нужные опции
+            cameraBarcodeReaderView.Options = new ZXing.Net.Maui.BarcodeReaderOptions();
+        }
+
+        //при нахождение баркода - добавить нужные действия (переход на другую страницу, сохранение, тп = метод в application)
+        //пока что просто уведомление
+        protected void BarcodesDetected(object sender, ZXing.Net.Maui.BarcodeDetectionEventArgs e)
+        {
+            var first = e.Results?.FirstOrDefault();
+            if (first is null)
+            {
+                return;
+            }
+
+            Dispatcher.DispatchAsync(async () =>
+            {
+                await DisplayAlertAsync("Barcode Detected", first.Value, "OK");
+            });
         }
 
         private void OnCounterClicked(object? sender, EventArgs e)

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using ZXing.Net.Maui.Controls;
+using Microsoft.Extensions.Logging;
 
 namespace cashback_maui
 {
@@ -13,7 +14,8 @@ namespace cashback_maui
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                });
+                })
+                .UseBarcodeReader();
 
 #if DEBUG
     		builder.Logging.AddDebug();
