@@ -60,25 +60,24 @@ namespace cashback_maui
             });
             if (result is null)
             {
-                Dispatcher.DispatchAsync(async () =>
-                {
-                    await DisplayAlertAsync("Ошибка", "Не получено фото", "OK");
-                });
-                return;
+                await DisplayAlertAsync("Ошибка", "Не получено фото", "OK");
             }
 
             var barcode = await BarcodeScanner.DecodeBarcodeFromImageAsync(result.FullPath);
 
             if (barcode is null)
-                Dispatcher.DispatchAsync(async () =>
-                {
-                    await DisplayAlertAsync("Ошибка", "Штрих-код не найден", "ОК");
-                });
+                await DisplayAlertAsync("Ошибка", "Штрих-код не найден", "ОК");
             else
-                Dispatcher.DispatchAsync(async () =>
-                {
-                    await DisplayAlertAsync("Найден штрихкод", barcode.Value, "OK");
-                });
+                await DisplayAlertAsync("Найден штрихкод", barcode.Value, "OK");
+        }
+
+        //обработчик кнопки с генератором ean-13 кодов
+        Random random = new Random();
+        public async void OnMakeCodeClicked(object? sender, EventArgs e)
+        {
+            //цифру чексуммы zxing считает сам
+            barcodeView.Value = random.Next(100000, 999999).ToString() + random.Next(100000, 999999).ToString();
+            barcodeView.IsVisible = true;
         }
     }
 }
