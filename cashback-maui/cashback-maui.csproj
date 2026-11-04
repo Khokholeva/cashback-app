@@ -71,4 +71,8 @@
 		<PackageReference Include="ZXing.Net.Maui.Controls" Version="0.10.4" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\cashback-infrastructure\cashback-infrastructure.csproj" />
+	</ItemGroup>
+
 </Project>

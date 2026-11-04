@@ -1,4 +1,4 @@
-﻿using ZXing.Net.Maui.Controls;
+﻿using cashback_infrastructure;
 
 namespace cashback_maui
 {
@@ -40,6 +40,45 @@ namespace cashback_maui
                 CounterBtn.Text = $"Clicked {count} times";
 
             SemanticScreenReader.Announce(CounterBtn.Text);
+        }
+
+        //обработчик кнопки "Выбрать файл"
+        //открывает проводник, направляет выбранное фото в BarcodeScanner, показывает результат в уведомлении
+        private async void OnPickFileClicked(object? sender, EventArgs e)
+        {
+            var customFileType = new FilePickerFileType(new Dictionary<DevicePlatform, IEnumerable<string>>
+            {
+                { DevicePlatform.iOS, new[] { "public.image" } },
+                { DevicePlatform.Android, new[] { "image/*" } },
+                { DevicePlatform.WinUI, new[] { ".jpg", ".jpeg", ".png" } }
+            });
+
+            var result = await FilePicker.Default.PickAsync(new PickOptions
+            {
+                PickerTitle = "Выберите изображение с штрих-кодом",
+                FileTypes = customFileType
+            });
+            if (result is null)
+            {
+                Dispatcher.DispatchAsync(async () =>
+                {
+                    await DisplayAlertAsync("Ошибка", "Не получено фото", "OK");
+                });
+                return;
+            }
+
+            var barcode = await BarcodeScanner.DecodeBarcodeFromImageAsync(result.FullPath);
+
+            if (barcode is null)
+                Dispatcher.DispatchAsync(async () =>
+                {
+                    await DisplayAlertAsync("Ошибка", "Штрих-код не найден", "ОК");
+                });
+            else
+                Dispatcher.DispatchAsync(async () =>
+                {
+                    await DisplayAlertAsync("Найден штрихкод", barcode.Value, "OK");
+                });
         }
     }
 }

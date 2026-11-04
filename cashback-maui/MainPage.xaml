@@ -33,10 +33,24 @@
                 HorizontalOptions="Fill" />
             
             <!-- тест по сканированию баркодов -->
+            <!--Кнопка для выбора фото кода
+            отображается оповещение с декодированным кодом
+            работает на андроид, но думает несколько секунд-->
+            <Button
+                x:Name="PickFileBtn"
+                Text="Выбрать файл"
+                SemanticProperties.Hint="Выбрать файл для распознания штрих-кода"
+                Clicked="OnPickFileClicked"
+                HorizontalOptions="Fill" />
+
+            <!--Связь с камерой, которая сразу читает баркоды
+            на винде сработала, на андроиде нет
+            можно сделать вариант который будет открывать камеру, юзер делает фото и оно отдаются в тот же метод что и кнопка-->
             <zxing:CameraBarcodeReaderView
-              x:Name="cameraBarcodeReaderView"
-              IsDetecting="True"
-              BarcodesDetected="BarcodesDetected" />
+                x:Name="cameraBarcodeReaderView"
+                IsDetecting="True"
+                BarcodesDetected="BarcodesDetected" />
+
         </VerticalStackLayout>
     </ScrollView>
 
