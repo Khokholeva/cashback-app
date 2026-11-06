@@ -21,7 +21,7 @@ namespace cashback_domain.Entities
             return Id.GetHashCode();
         }
 
-        public void SaveToDB(IDBRepository dBRepository);
+        public void SaveToDB(IDBRepository< ,TID> dBRepository);
 
         
     }

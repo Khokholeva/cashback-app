@@ -8,7 +8,7 @@ namespace cashback_domain.Entities.Bank_Card
 {
     public interface IBankCardEntity : INotificationEntity<int>
     {
-        public IMCC[] CashBackCategories { get; init; }
+        public IMCCEntity[] CashBackCategories { get; init; }
         public Bank Bank { get; init; }
         public string AdditionalInfo { get; init; }
     }
