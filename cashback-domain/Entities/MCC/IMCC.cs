@@ -4,7 +4,7 @@ using System.Text;
 
 namespace cashback_domain.Entities.MCC
 {
-    internal interface IMCC
+    public interface IMCC
     {
         public int Code { get; init; }
 

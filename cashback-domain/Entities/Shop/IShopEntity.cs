@@ -4,7 +4,7 @@ using cashback_domain.Enums;
 
 namespace cashback_domain.Entities.Shop
 {
-    internal interface IShopEntity : IEntity<int>
+    public interface IShopEntity : IEntity<int>
     {
         public IMCC MainMCC { get; init; }
         public IMCC[] PossibleMCCs { get; init; }

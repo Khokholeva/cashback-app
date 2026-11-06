@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using cashback_domain.Entities.DB;
 
 namespace cashback_domain.Entities
 {
-    internal interface IEntity<TID>
+    public interface IEntity<TID>
         where TID : notnull
     {
         public TID Id { get; set; }
@@ -20,8 +21,8 @@ namespace cashback_domain.Entities
             return Id.GetHashCode();
         }
 
-        public void AddToDB();
+        public void SaveToDB(IDBRepository dBRepository);
 
-        public IEntity<TID> GetFromDB();
+        
     }
 }

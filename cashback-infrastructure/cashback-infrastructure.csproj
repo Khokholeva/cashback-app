@@ -8,16 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.14" />
     <PackageReference Include="SkiaSharp" Version="4.154.0" />
-    <PackageReference Include="System.Data.SQLite" Version="2.0.4" />
-    <PackageReference Include="System.Data.SQLite.Core" Version="1.0.119" />
-    <PackageReference Include="System.Data.SQLite.Linq" Version="1.0.119" />
     <PackageReference Include="ZXing.Net.Maui" Version="0.10.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DB\LocalDB\" />
     <Folder Include="Server\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\cashback-domain\cashback-domain.csproj" />
   </ItemGroup>
 
 </Project>

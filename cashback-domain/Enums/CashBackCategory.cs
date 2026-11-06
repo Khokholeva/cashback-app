@@ -4,6 +4,7 @@ using System.Text;
 
 namespace cashback_domain.Enums;
 
+[Obsolete]
 public enum CashBackCategory
 {
 

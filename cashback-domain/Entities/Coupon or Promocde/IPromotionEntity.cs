@@ -6,7 +6,7 @@ using cashback_domain.Enums;
 
 namespace cashback_domain.Entities.Coupon_or_Promocde
 {
-    internal interface IPromotionEntity : IEntity<int>
+    public interface IPromotionEntity : IEntity<int>
     {
         public double DiscountValue { get; init; }
         public DiscountMeasurementUnit DiscountMeasurementUnit { get; init; }

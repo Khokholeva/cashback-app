@@ -8,11 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="BarCode" Version="2026.10.10" />
+    <Folder Include="ValueTypes\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ValueTypes\" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.14" />
+    <PackageReference Include="ZXing.Net.Maui" Version="0.10.4" />
   </ItemGroup>
 
 </Project>

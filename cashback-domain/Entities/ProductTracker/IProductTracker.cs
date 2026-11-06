@@ -5,7 +5,7 @@ using cashback_domain.Entities.Shop;
 
 namespace cashback_domain.Entities.ProductTracker
 {
-    internal interface IProductTracker : IEntity<int>
+    public interface IProductTracker : IEntity<int>
     {
         public Dictionary<IShopEntity, (int Price, string URL)> PricesAtShops { get; init; }
         public DateTime PriceGotAt { get; init; }
