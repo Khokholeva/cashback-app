@@ -3,6 +3,7 @@
   "WorkspaceRootPath": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{B24D891D-AC67-4DFE-A0D2-81AAF91FE4B0}|cashback-infrastructure\\cashback-infrastructure.csproj|c:\\users\\pangolin\\desktop\\cashback-app\\cashback-infrastructure\\db\\localdb\\bankcardrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B24D891D-AC67-4DFE-A0D2-81AAF91FE4B0}|cashback-infrastructure\\cashback-infrastructure.csproj|solutionrelative:cashback-infrastructure\\db\\localdb\\bankcardrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -12,6 +13,17 @@
     },
     {
       "AbsoluteMoniker": "D:0:0:{B1902743-E85D-9F1C-C20F-DB10A829892A}|cashback-maui\\cashback-maui.csproj|c:\\users\\pangolin\\desktop\\cashback-app\\cashback-maui\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+=======
+      "AbsoluteMoniker": "D:0:0:{B1902743-E85D-9F1C-C20F-DB10A829892A}|cashback-maui\\cashback-maui.csproj|c:\\users\\pc\\source\\repos\\cashback-app\\cashback-maui\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B1902743-E85D-9F1C-C20F-DB10A829892A}|cashback-maui\\cashback-maui.csproj|solutionrelative:cashback-maui\\mainpage.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B24D891D-AC67-4DFE-A0D2-81AAF91FE4B0}|cashback-infrastructure\\cashback-infrastructure.csproj|c:\\users\\pc\\source\\repos\\cashback-app\\cashback-infrastructure\\barcodescanner\\barcodescanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B24D891D-AC67-4DFE-A0D2-81AAF91FE4B0}|cashback-infrastructure\\cashback-infrastructure.csproj|solutionrelative:cashback-infrastructure\\barcodescanner\\barcodescanner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B1902743-E85D-9F1C-C20F-DB10A829892A}|cashback-maui\\cashback-maui.csproj|c:\\users\\pc\\source\\repos\\cashback-app\\cashback-maui\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+>>>>>>> 95a17790f5d0180ff70455f0b24c024ed3500b14
       "RelativeMoniker": "D:0:0:{B1902743-E85D-9F1C-C20F-DB10A829892A}|cashback-maui\\cashback-maui.csproj|solutionrelative:cashback-maui\\mainpage.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
@@ -42,7 +54,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 0,
+=======
+          "SelectedChildIndex": 1,
+>>>>>>> 95a17790f5d0180ff70455f0b24c024ed3500b14
           "Children": [
             {
               "$type": "Document",
@@ -63,13 +79,46 @@
             },
             {
               "$type": "Document",
+<<<<<<< HEAD
+=======
+              "DocumentIndex": 0,
+              "Title": "MainPage.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\pc\\source\\repos\\cashback-app\\cashback-maui\\MainPage.xaml.cs",
+              "RelativeDocumentMoniker": "cashback-maui\\MainPage.xaml.cs",
+              "ToolTip": "C:\\Users\\pc\\source\\repos\\cashback-app\\cashback-maui\\MainPage.xaml.cs",
+              "RelativeToolTip": "cashback-maui\\MainPage.xaml.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAIwE0AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-04T15:44:37.644Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BarcodeScanner.cs",
+              "DocumentMoniker": "C:\\Users\\pc\\source\\repos\\cashback-app\\cashback-infrastructure\\BarcodeScanner\\BarcodeScanner.cs",
+              "RelativeDocumentMoniker": "cashback-infrastructure\\BarcodeScanner\\BarcodeScanner.cs",
+              "ToolTip": "C:\\Users\\pc\\source\\repos\\cashback-app\\cashback-infrastructure\\BarcodeScanner\\BarcodeScanner.cs",
+              "RelativeToolTip": "cashback-infrastructure\\BarcodeScanner\\BarcodeScanner.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwCMAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-11-04T15:49:29.401Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+>>>>>>> 95a17790f5d0180ff70455f0b24c024ed3500b14
               "DocumentIndex": 2,
               "Title": "MainPage.xaml",
               "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-maui\\MainPage.xaml",
               "RelativeDocumentMoniker": "cashback-maui\\MainPage.xaml",
               "ToolTip": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-maui\\MainPage.xaml",
               "RelativeToolTip": "cashback-maui\\MainPage.xaml",
+<<<<<<< HEAD
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+=======
+              "ViewState": "AgIAACsAAAAAAAAAAAAcwDYAAAARAAAAAAAAAA==",
+>>>>>>> 95a17790f5d0180ff70455f0b24c024ed3500b14
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
               "WhenOpened": "2026-11-05T14:05:30.559Z"
             },
@@ -113,12 +162,21 @@
             {
               "$type": "Document",
               "DocumentIndex": 3,
+<<<<<<< HEAD
               "Title": "IDiscountCardEntity.cs",
               "DocumentMoniker": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\Cards\\Discount Card\\IDiscountCardEntity.cs",
               "RelativeDocumentMoniker": "cashback-domain\\Entities\\Cards\\Discount Card\\IDiscountCardEntity.cs",
               "ToolTip": "C:\\Users\\Pangolin\\Desktop\\cashback-app\\cashback-domain\\Entities\\Cards\\Discount Card\\IDiscountCardEntity.cs",
               "RelativeToolTip": "cashback-domain\\Entities\\Cards\\Discount Card\\IDiscountCardEntity.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAA+AAAAAAAAAA==",
+=======
+              "Title": "MauiProgram.cs",
+              "DocumentMoniker": "C:\\Users\\pc\\source\\repos\\cashback-app\\cashback-maui\\MauiProgram.cs",
+              "RelativeDocumentMoniker": "cashback-maui\\MauiProgram.cs",
+              "ToolTip": "C:\\Users\\pc\\source\\repos\\cashback-app\\cashback-maui\\MauiProgram.cs",
+              "RelativeToolTip": "cashback-maui\\MauiProgram.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+>>>>>>> 95a17790f5d0180ff70455f0b24c024ed3500b14
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-11-04T18:27:28.572Z"
             },

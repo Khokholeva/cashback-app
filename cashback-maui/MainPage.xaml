@@ -43,6 +43,23 @@
                 Clicked="OnPickFileClicked"
                 HorizontalOptions="Fill" />
 
+            <!-- генерация случайного баркода-->
+            <Button
+                x:Name="MakeCodeBtn"
+                Text="Создать код"
+                SemanticProperties.Hint="генерирует случайное число и баркод для него"
+                Clicked="OnMakeCodeClicked"
+                HorizontalOptions="Fill" />
+            
+            <!--использует готовый BarcodeGeneratorView
+            можно просто изображение и менять его через методы в BarcodeScanner-->
+            <zxing:BarcodeGeneratorView x:Name="barcodeView"
+                                    Format="Ean13"
+                                    WidthRequest="250"
+                                    HeightRequest="125"
+                                    ForegroundColor="Black"
+                                    IsVisible="False" />
+
             <!--Связь с камерой, которая сразу читает баркоды
             на винде сработала, на андроиде нет
             можно сделать вариант который будет открывать камеру, юзер делает фото и оно отдаются в тот же метод что и кнопка-->
