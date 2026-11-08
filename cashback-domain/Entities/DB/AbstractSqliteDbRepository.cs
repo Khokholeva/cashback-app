@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 
-namespace cashback_domain.Entities.DB
+namespace cashback_domain.Entities
 {
     public abstract class AbstractSqliteDbRepository<TEntity> : ISqLiteDbRepository<TEntity>
         where TEntity : IEntity<int>

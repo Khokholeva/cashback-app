@@ -1,5 +1,4 @@
-﻿using cashback_domain.Entities.Shop;
-using ZXing.Net.Maui;
+﻿using ZXing.Net.Maui;
 
 namespace cashback_domain.Entities
 {

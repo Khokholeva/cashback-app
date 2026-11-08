@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using cashback_domain.Entities;
-using cashback_domain.Entities.Bank;
-using cashback_domain.Entities.DB;
+﻿using cashback_domain.Entities;
 
-namespace cashback_infrastructure.DB.LocalDB
+namespace cashback_infrastructure.DB
 {
     public class BankRepository : IBankRepository
     {

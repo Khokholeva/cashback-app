@@ -1,9 +1,5 @@
-﻿using cashback_domain.DB;
-using cashback_domain.Entities;
-using cashback_domain.Entities.Bank;
-using cashback_domain.Entities.Cards.Bank_Card;
-using cashback_domain.Entities.MCC;
-using cashback_infrastructure.DB.LocalDB;
+﻿using cashback_domain.Entities;
+using cashback_infrastructure.DB;
 using System.Reflection;
 
 namespace cashback_application

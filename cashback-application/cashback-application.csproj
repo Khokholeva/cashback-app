@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\cashback-domain\cashback-domain.csproj" />
+    <ProjectReference Include="..\cashback-infrastructure\cashback-infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>

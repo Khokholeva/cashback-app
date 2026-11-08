@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace cashback_domain.Entities.MCC
+﻿namespace cashback_domain.Entities
 {
     public interface IMCCEntity : IEntity<int>
     {

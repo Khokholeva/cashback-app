@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using cashback_domain.Entities.Shop;
-using cashback_domain.Enums;
+﻿using cashback_domain.Enums;
 
-namespace cashback_domain.Entities.Coupon_or_Promocde
+namespace cashback_domain.Entities
 {
     public interface IPromotionEntity : IEntity<int>
     {

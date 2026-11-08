@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using cashback_domain.Entities.Bank_Card;
-using cashback_domain.Entities.MCC;
-using cashback_domain.Enums;
-
-namespace cashback_domain.Entities.Cards.Bank_Card
+﻿namespace cashback_domain.Entities
 {
     public class BankCardEntity : IBankCardEntity
     {
@@ -15,7 +8,7 @@ namespace cashback_domain.Entities.Cards.Bank_Card
         public DateTime NextNotification { get; set; }
         public int Id { get; set; }
 
-        public void SaveToDB(DB.IDBRepository<BankCardEntity, int> dBRepository)
+        public void SaveToDB(IDBRepository<BankCardEntity, int> dBRepository)
         {
             throw new NotImplementedException();
         }
