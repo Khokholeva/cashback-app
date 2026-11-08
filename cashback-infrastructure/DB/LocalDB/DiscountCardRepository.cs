@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using cashback_domain.Entities.Cards.Discount_Card;
 using cashback_domain.Entities.DB;
-using cashback_domain.Entities.Discount_Card;
+using cashback_domain.Entities;
 
 namespace cashback_infrastructure.DB.LocalDB
 {

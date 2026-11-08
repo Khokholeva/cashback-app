@@ -10,12 +10,12 @@ namespace cashback_domain.Entities.Cards.Bank_Card
     public class BankCardEntity : IBankCardEntity
     {
         public IMCCEntity[] CashBackCategories { get; init; }
-        public Bank Bank { get; init; }
+        public int BankId {  get; init; }
         public string AdditionalInfo { get; init; }
         public DateTime NextNotification { get; set; }
         public int Id { get; set; }
 
-        public void SaveToDB(DB.IDBRepository dBRepository)
+        public void SaveToDB(DB.IDBRepository<BankCardEntity, int> dBRepository)
         {
             throw new NotImplementedException();
         }

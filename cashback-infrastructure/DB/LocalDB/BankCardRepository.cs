@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using cashback_domain.Entities.Bank_Card;
+using cashback_domain.Entities;
 using cashback_domain.Entities.Cards.Bank_Card;
 using cashback_domain.Entities.DB;
 

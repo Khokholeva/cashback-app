@@ -1,7 +1,7 @@
 ﻿using cashback_domain.Entities.Shop;
 using ZXing.Net.Maui;
 
-namespace cashback_domain.Entities.Discount_Card
+namespace cashback_domain.Entities
 {
     public interface IDiscountCardEntity : INotificationEntity<int>
     {
