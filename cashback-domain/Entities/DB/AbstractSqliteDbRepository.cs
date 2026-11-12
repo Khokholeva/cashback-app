@@ -5,6 +5,7 @@ using Microsoft.Data.Sqlite;
 
 namespace cashback_domain.Entities.DB
 {
+    [Obsolete]
     public abstract class AbstractSqliteDbRepository<TEntity> : ISqLiteDbRepository<TEntity>
         where TEntity : IEntity<int>
     {
