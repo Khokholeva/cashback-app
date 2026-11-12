@@ -1,8 +1,6 @@
-﻿using cashback_domain.Entities.Discount_Card;
-using cashback_domain.Entities.MCC;
-using cashback_domain.Enums;
+﻿using cashback_domain.Enums;
 
-namespace cashback_domain.Entities.Shop
+namespace cashback_domain.Entities
 {
     public interface IShopEntity : IEntity<int>
     {

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 
-namespace cashback_infrastructure.DB.LocalDB
+namespace cashback_infrastructure.DB
 {
     [Obsolete]
     internal class SQLiteDBRepo

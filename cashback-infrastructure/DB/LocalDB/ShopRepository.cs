@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using cashback_domain.Entities.DB;
-using cashback_domain.Entities.Shop;
+﻿using cashback_domain.Entities;
 
-namespace cashback_infrastructure.DB.LocalDB
+namespace cashback_infrastructure.DB
 {
     internal class ShopRepository : IShopRepository
     {

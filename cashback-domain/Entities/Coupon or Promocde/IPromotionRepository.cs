@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using cashback_domain.Entities.DB;
-
-namespace cashback_domain.Entities.Coupon_or_Promocde
+﻿namespace cashback_domain.Entities
 {
     public interface IPromotionRepository : ISqLiteDbRepository<IPromotionEntity>
     {
