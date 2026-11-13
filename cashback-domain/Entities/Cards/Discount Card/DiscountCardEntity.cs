@@ -4,15 +4,10 @@ namespace cashback_domain.Entities
 {
     public class DiscountCardEntity : IDiscountCardEntity
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public BarcodeResult Barcode { get; init; }
         public IShopEntity Shop { get; init; }
         public DateTime NextNotification { get; set; }
-
-        public void SaveToDB(IDBRepository<DiscountCardEntity, int> dBRepository)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

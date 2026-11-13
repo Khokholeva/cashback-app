@@ -6,7 +6,7 @@ namespace cashback_domain.Entities
     public abstract class AbstractSqliteDbRepository<TEntity> : ISqLiteDbRepository<TEntity>
         where TEntity : IEntity<int>
     {
-        public abstract string DbFilename { get; init; }
+        public string DbFilename { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public abstract Task DeleteByIDAsync(int id);
 
@@ -26,6 +26,11 @@ namespace cashback_domain.Entities
             createCmd.CommandText = GetTableCreationCommand();
 
             await createCmd.ExecuteNonQueryAsync();
+        }
+
+        public Task InitializeDBAsync(string dataSource)
+        {
+            throw new NotImplementedException();
         }
 
         public abstract Task SaveAsync(TEntity entity);

@@ -2,7 +2,7 @@
 
 namespace cashback_domain.Entities
 {
-    public interface IPromotionEntity : IEntity<int>
+    public interface IPromotionEntity : IEntity<int?>
     {
         public double DiscountValue { get; init; }
         public DiscountMeasurementUnit DiscountMeasurementUnit { get; init; }

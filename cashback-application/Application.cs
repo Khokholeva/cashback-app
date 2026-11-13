@@ -1,23 +1,38 @@
-﻿using cashback_domain.Entities;
+﻿using System.Reflection;
+using cashback_domain.Entities;
 using cashback_infrastructure.DB;
-using System.Reflection;
+using Ninject;
 
 namespace cashback_application
 {
     public static class Application
     {
-        static BankRepository bankRepository;
+        static IBankRepository bankRepository;
         static IMCCRepository mCCRepository;
         static IBankCardRepository bankCardRepository;
         static IDiscountCardRepository discountCardRepository;
 
         //при первом запуске - создать бд и сохранить пути к ним
-        public static void Initialize()
+        public static void Initialize(string dataSource)
         {
-            bankRepository = new BankRepository();
-            mCCRepository = new MCCRepository();
-            bankCardRepository = new BankCardRepository();
-            discountCardRepository = new DiscountCardRepository();
+            var container = ConfigureContainer();
+
+            bankRepository = container.Get<IBankRepository>();
+            mCCRepository = container.Get<IMCCRepository>();
+            bankCardRepository = container.Get<IBankCardRepository>();
+            discountCardRepository = container.Get<IDiscountCardRepository>();
+        }
+
+        public static StandardKernel ConfigureContainer()
+        {
+            var container = new StandardKernel();
+
+            container.Bind<IBankRepository>().To<BankRepository>().InSingletonScope();
+            container.Bind<IBankCardRepository>().To<BankCardRepository>().InSingletonScope();
+            container.Bind<IMCCRepository>().To<MCCRepository>().InSingletonScope();
+            container.Bind<IDiscountCardRepository>().To<DiscountCardRepository>().InSingletonScope();
+
+            return container;
         }
 
         /// <summary>
@@ -41,14 +56,7 @@ namespace cashback_application
 
         public static async void EditBankCard(int id, string fieldName, object value) // возможны другие варианты аргументов, предлагайте
         {
-            var card = await bankCardRepository.FindByIDAsync(id);
-            Type type = card.GetType();
-            FieldInfo field = type.GetField(fieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-            if (field != null)
-            {
-                field.SetValue(card, value);
-            }
-            card.SaveToDB(bankCardRepository);
+            EditDBEntry(bankCardRepository, id, fieldName, value);
 
         }
 
@@ -70,14 +78,21 @@ namespace cashback_application
 
         public static async void EditDiscountCard(int id, string fieldName, object value) // возможны другие варианты аргументов, предлагайте
         {
-            var card = await discountCardRepository.FindByIDAsync(id);
-            Type type = card.GetType();
+            EditDBEntry(discountCardRepository, id, fieldName, value);
+        }
+
+        public static async void EditDBEntry<TEntity, TID>(
+            IDBRepository<TEntity, TID> dBRepository, TID id, string fieldName, object value)
+            where TEntity : IEntity<TID>
+        {
+            var entity = await dBRepository.FindByIDAsync(id);
+            Type type = entity.GetType();
             FieldInfo field = type.GetField(fieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             if (field != null)
             {
-                field.SetValue(card, value);
+                field.SetValue(entity, value);
             }
-            card.SaveToDB(discountCardRepository);
+            entity.SaveToDB(dBRepository);
         }
     }
 }

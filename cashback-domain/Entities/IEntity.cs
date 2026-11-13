@@ -1,23 +1,23 @@
 ﻿namespace cashback_domain.Entities
 {
     public interface IEntity<TID>
-        where TID : notnull
     {
-        public TID Id { get; set; }
+        public TID? Id { get; set; }
+    }
 
-        public virtual bool Equals(IEntity<TID> other)
+    public static class EntityExtensions
+    {
+        public static bool Equals<TEntity,TID>(this TEntity entity, TEntity other)
+            where TEntity : IEntity<TID>
         {
-            if (other is null) return false;
-            return other.Id.Equals(Id) && other.GetType().IsInstanceOfType(this);
+            if (other is null || other.Id is null) return false;
+            return other.Id.Equals(entity.Id) && other.GetType().IsInstanceOfType(entity);
         }
 
-        public virtual int GetHashCode()
+        public static int GetHashCode<TEntity, TID>(this TEntity entity)
+            where TEntity : IEntity<TID>
         {
-            return Id.GetHashCode();
+            return entity.Id?.GetHashCode() ?? 0;
         }
-
-        public void SaveToDB(IDBRepository<IEntity<TID> ,TID> dBRepository);
-
-        
     }
 }

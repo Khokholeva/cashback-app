@@ -2,9 +2,8 @@
 {
     public interface IDBRepository<TEntity, TID>
         where TEntity : IEntity<TID>
-        where TID : notnull
     {
-        public Task<IEnumerable<TEntity>> GetAllEntriesAsync();
+        public IAsyncEnumerable<TEntity> GetAllEntriesAsync();
 
         public Task<TEntity> FindByIDAsync(TID id);
 
@@ -12,7 +11,7 @@
 
         public Task DeleteByIDAsync(TID id);
 
-        public Task InitializeDBAsync();
+        public Task InitializeDBAsync(string dataSource);
 
     }
 }

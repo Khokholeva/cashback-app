@@ -1,10 +1,11 @@
 ﻿using cashback_domain.Entities;
+using cashback_infrastructure.DB.LocalDB;
 
 namespace cashback_infrastructure.DB
 {
     internal class ShopRepository : IShopRepository
     {
-        public string DbFilename { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
+        public string DbFilename { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public Task DeleteByIDAsync(int id)
         {
@@ -33,9 +34,9 @@ namespace cashback_infrastructure.DB
                 brief-description TEXT);";
         }
 
-        public Task InitializeDBAsync()
+        public Task InitializeDBAsync(string dataSource)
         {
-            return this.InitializeDBAsync<IShopEntity>();
+            return this.InitializeSQliteDB(dataSource);
         }
 
         public Task SaveAsync(IShopEntity entity)

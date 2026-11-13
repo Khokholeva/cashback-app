@@ -81,7 +81,7 @@ namespace cashback_infrastructure.DB
 
         public Task SaveAsync<T>(T entity)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }
