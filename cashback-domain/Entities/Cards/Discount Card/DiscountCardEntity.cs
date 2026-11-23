@@ -4,10 +4,10 @@ namespace cashback_domain.Entities
 {
     public class DiscountCardEntity : IDiscountCardEntity
     {
-        public int? Id { get; set; }
+        public int? Id { get; init; }
         public BarcodeResult Barcode { get; init; }
-        public IShopEntity Shop { get; init; }
-        public DateTime NextNotification { get; set; }
+        public int ShopID { get; init; }
+        public DateTime? NextNotification { get; set; }
     }
 }
 

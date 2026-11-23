@@ -2,7 +2,7 @@
 {
     public interface IBankCardEntity : INotificationEntity<int?>
     {
-        public int[] CashBackCategoriesIDs { get; set; }
+        public Dictionary<int, int> CashBackCategories { get; init; }
         public int BankId { get; init; }
         public string AdditionalInfo { get; set; }
         public int? Limit { get; set; }

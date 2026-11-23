@@ -4,6 +4,6 @@
     {
         public string Name { get; init; }
 
-        public string Desctiption { get; init; }
+        public string Description { get; init; }
     }
 }

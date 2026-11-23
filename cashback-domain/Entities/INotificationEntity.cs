@@ -2,6 +2,6 @@
 {
     public interface INotificationEntity<T> : IEntity<T>
     {
-        public DateTime NextNotification { get; set; }
+        public DateTime? NextNotification { get; set; }
     }
 }

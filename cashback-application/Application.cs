@@ -17,7 +17,7 @@ namespace cashback_application
         {
             var container = ConfigureContainer();
 
-            bankRepository = container.Get<IBankRepository>();
+            bankRepository = new BankRepository();
             mCCRepository = container.Get<IMCCRepository>();
             bankCardRepository = container.Get<IBankCardRepository>();
             discountCardRepository = container.Get<IDiscountCardRepository>();

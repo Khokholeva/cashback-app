@@ -8,10 +8,11 @@ namespace cashback_infrastructure.DB.LocalDB
 {
     public static class Extensions
     {
-        public static async Task InitializeSQliteDB<T>(this ISqLiteDbRepository<T> repo, string dataSource)
+        public static async Task InitializeSQliteDB<T, TRepo>(this TRepo repo, string dataSource)
             where T : IEntity<int?>
+            where TRepo : ISqLiteDbRepository<T>, new()
         {
-            repo.DbFilename = dataSource;
+            repo = new TRepo() { DbFilename = dataSource };
 
             using (var connection = await repo.GetConnection())
             {

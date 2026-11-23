@@ -6,7 +6,7 @@ namespace cashback_domain.Entities
     {
         public double DiscountValue { get; init; }
         public DiscountMeasurementUnit DiscountMeasurementUnit { get; init; }
-        public IShopEntity Shop { get; init; }
+        public int? ShopID { get; init; }
         public DateTime ValidUntil { get; init; }
     }
 }

@@ -2,7 +2,7 @@
 {
     public interface IEntity<TID>
     {
-        public TID? Id { get; set; }
+        public TID? Id { get; init; }
     }
 
     public static class EntityExtensions

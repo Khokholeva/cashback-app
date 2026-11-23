@@ -2,5 +2,6 @@
 {
     public interface IDiscountCardRepository : ISqLiteDbRepository<IDiscountCardEntity>
     {
+        IAsyncEnumerable<IDiscountCardEntity> GetAllShopCards(int? shopID);
     }
 }
