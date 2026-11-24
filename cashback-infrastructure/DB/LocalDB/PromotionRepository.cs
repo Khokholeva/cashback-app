@@ -6,7 +6,7 @@ using Microsoft.Data.Sqlite;
 
 namespace cashback_infrastructure.DB
 {
-    internal class PromotionRepository : SQLiteDBRepo<IPromotionEntity>, IPromotionRepository
+    public class PromotionRepository : SQLiteDBRepo<IPromotionEntity>, IPromotionRepository
     {
         public override async Task DeleteByIDAsync(int? id)
         {

@@ -139,6 +139,17 @@ namespace cashback_infrastructure.DB
                 await cmd.ExecuteNonQueryAsync();
             }
         }
+
+        public async IAsyncEnumerable<IBankCardEntity> GetAllWithCorrectMCCs(int[] mcc)
+        {
+            await foreach (var entity in GetAllEntriesAsync())
+                foreach (var code in mcc)
+                    if (entity.CashBackCategories.ContainsKey(code))
+                    {
+                        yield return entity;
+                        break;
+                    }
+        }
     }
 
     internal class BankCardEntityFromDB : IBankCardEntity

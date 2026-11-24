@@ -1,7 +1,9 @@
 ﻿using System.Reflection;
+using cashback_application.Factories;
 using cashback_domain.Entities;
 using cashback_infrastructure.DB;
 using Ninject;
+using Ninject.Extensions.Factory;
 
 namespace cashback_application
 {
@@ -11,16 +13,21 @@ namespace cashback_application
         static IMCCRepository mCCRepository;
         static IBankCardRepository bankCardRepository;
         static IDiscountCardRepository discountCardRepository;
+        static IShopRepository shopRepository;
+        static IPromotionRepository promotionRepository;
+
 
         //при первом запуске - создать бд и сохранить пути к ним
         public static void Initialize(string dataSource)
         {
             var container = ConfigureContainer();
 
-            bankRepository = new BankRepository();
+            bankRepository = container.Get<IBankRepository>();
             mCCRepository = container.Get<IMCCRepository>();
             bankCardRepository = container.Get<IBankCardRepository>();
             discountCardRepository = container.Get<IDiscountCardRepository>();
+            shopRepository = container.Get<IShopRepository>();
+            promotionRepository = container.Get<IPromotionRepository>();
         }
 
         public static StandardKernel ConfigureContainer()
@@ -31,6 +38,8 @@ namespace cashback_application
             container.Bind<IBankCardRepository>().To<BankCardRepository>().InSingletonScope();
             container.Bind<IMCCRepository>().To<MCCRepository>().InSingletonScope();
             container.Bind<IDiscountCardRepository>().To<DiscountCardRepository>().InSingletonScope();
+            container.Bind<IShopRepository>().To<ShopRepository>().InSingletonScope();
+            container.Bind<IPromotionRepository>().To<PromotionRepository>().InSingletonScope();
 
             return container;
         }
@@ -49,9 +58,9 @@ namespace cashback_application
             bankCardRepository.DeleteByIDAsync(id);
         }
 
-        public static async Task<IEnumerable<IBankCardEntity>> GetBankCards()
+        public static async IAsyncEnumerable<IBankCardEntity> GetBankCards()
         {
-            return await bankCardRepository.GetAllEntriesAsync();
+            return bankCardRepository.GetAllEntriesAsync();
         }
 
         public static async void EditBankCard(int id, string fieldName, object value) // возможны другие варианты аргументов, предлагайте

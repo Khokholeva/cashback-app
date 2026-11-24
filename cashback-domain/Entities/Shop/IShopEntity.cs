@@ -9,5 +9,6 @@ namespace cashback_domain.Entities
         public string Name { get; init; }
         public IDiscountCardEntity[] DiscountCards { get; init; }
         public string BriefDescription { get; init; }
+        public IBankCardEntity[] BankCardsWithShopMCCs { get; }
     }
 }

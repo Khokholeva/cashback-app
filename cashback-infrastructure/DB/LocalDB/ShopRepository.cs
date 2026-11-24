@@ -5,17 +5,20 @@ using Microsoft.Data.Sqlite;
 
 namespace cashback_infrastructure.DB
 {
-    internal class ShopRepository : SQLiteDBRepo<IShopEntity>, IShopRepository
+    public class ShopRepository : SQLiteDBRepo<IShopEntity>, IShopRepository
     {
         private readonly IDiscountCardRepository _discountCardRepository;
         private readonly IMCCRepository _mccRepository;
+        private IBankCardRepository _bankCardRepository;
 
         public ShopRepository(
             IDiscountCardRepository discountCardRepository,
-            IMCCRepository mccRepository)
+            IMCCRepository mccRepository,
+            IBankCardRepository bankCardRepository)
         {
             _discountCardRepository = discountCardRepository;
             _mccRepository = mccRepository;
+            _bankCardRepository = bankCardRepository;
         }
 
         private async Task<IShopEntity> ReadFromDB(SqliteDataReader reader)
@@ -28,12 +31,15 @@ namespace cashback_infrastructure.DB
 
             var possibleMccs = new List<IMCCEntity>();
 
+            var mccList = new List<int>();
+
             if (!reader.IsDBNull(3))
             {
                 foreach (var mccString in reader.GetString(3).Split(';'))
                 {
                     if (int.TryParse(mccString, out var mccId))
                     {
+                        mccList.Add(mccId);
                         possibleMccs.Add(
                             await _mccRepository.FindByIDAsync(mccId));
                     }
@@ -46,16 +52,14 @@ namespace cashback_infrastructure.DB
 
             var discountCards = new List<IDiscountCardEntity>();
 
-            await foreach (var card in _discountCardRepository.GetAllShopCards(id))
-                discountCards.Add(card);
-
             return new ShopEntityFromDB(
                 mainMcc,
                 possibleMccs.ToArray(),
                 name,
-                discountCards.ToArray(),
+                await _discountCardRepository.GetAllShopCards(id).ToArrayAsync(),
                 briefDescription,
-                id
+                id,
+                await _bankCardRepository.GetAllWithCorrectMCCs(mccList.ToArray()).ToArrayAsync()
             );
         }
 
@@ -198,7 +202,8 @@ namespace cashback_infrastructure.DB
             string name,
             IDiscountCardEntity[] discountCards,
             string briefDescription,
-            int? id)
+            int? id,
+            IBankCardEntity[] bankCardsWithShopMCCs)
         {
             MainMCC = mainMcc;
             PossibleMCCs = possibleMccs;
@@ -206,6 +211,7 @@ namespace cashback_infrastructure.DB
             DiscountCards = discountCards;
             BriefDescription = briefDescription;
             Id = id;
+            BankCardsWithShopMCCs = bankCardsWithShopMCCs;
         }
 
         public IMCCEntity MainMCC { get; init; }
@@ -219,5 +225,7 @@ namespace cashback_infrastructure.DB
         public string BriefDescription { get; init; }
 
         public int? Id { get; init; }
+
+        public IBankCardEntity[] BankCardsWithShopMCCs { get; }
     }
 }
