@@ -10,12 +10,13 @@ namespace cashback_infrastructure
     {
         public static BarcodeFormat StringToBarcodeFormat(this string stringFormat)
         {
-            return (BarcodeFormat)typeof(BarcodeFormat)
+            var barcodeType = typeof(BarcodeFormat)
                 .GetFields()
-                .Where(field => field.IsLiteral)
-                .First(field => field.Name == stringFormat)?
-                .GetRawConstantValue();
+                .FirstOrDefault(field => field.IsLiteral && field.Name == stringFormat)
+                ?? throw new ArgumentException($"{stringFormat} не является существующим типом штрихкода!");
+                
 
+            return (BarcodeFormat)barcodeType.GetRawConstantValue();
         }
     }
 }

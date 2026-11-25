@@ -5,16 +5,16 @@ using Microsoft.Data.Sqlite;
 
 namespace cashback_infrastructure.DB
 {
-    public class ShopRepository : SQLiteDBRepo<IShopEntity>, IShopRepository
+    public class ShopLocalRepository : SQLiteDBRepo<IShopEntity>, IShopLocalRepository
     {
-        private readonly IDiscountCardRepository _discountCardRepository;
-        private readonly IMCCRepository _mccRepository;
-        private IBankCardRepository _bankCardRepository;
+        private readonly IDiscountCardLocalRepository _discountCardRepository;
+        private readonly IMCCLocalRepository _mccRepository;
+        private IBankCardLocalRepository _bankCardRepository;
 
-        public ShopRepository(
-            IDiscountCardRepository discountCardRepository,
-            IMCCRepository mccRepository,
-            IBankCardRepository bankCardRepository)
+        public ShopLocalRepository(
+            IDiscountCardLocalRepository discountCardRepository,
+            IMCCLocalRepository mccRepository,
+            IBankCardLocalRepository bankCardRepository)
         {
             _discountCardRepository = discountCardRepository;
             _mccRepository = mccRepository;
@@ -31,15 +31,12 @@ namespace cashback_infrastructure.DB
 
             var possibleMccs = new List<IMCCEntity>();
 
-            var mccList = new List<int>();
-
             if (!reader.IsDBNull(3))
             {
                 foreach (var mccString in reader.GetString(3).Split(';'))
                 {
                     if (int.TryParse(mccString, out var mccId))
                     {
-                        mccList.Add(mccId);
                         possibleMccs.Add(
                             await _mccRepository.FindByIDAsync(mccId));
                     }
@@ -59,7 +56,11 @@ namespace cashback_infrastructure.DB
                 await _discountCardRepository.GetAllShopCards(id).ToArrayAsync(),
                 briefDescription,
                 id,
-                await _bankCardRepository.GetAllWithCorrectMCCs(mccList.ToArray()).ToArrayAsync()
+                await _bankCardRepository
+                .GetAllWithCorrectMCCs(
+                    possibleMccs.Select(mcc => mcc.Id.Value)
+                    .ToArray()
+                    ).ToArrayAsync()
             );
         }
 

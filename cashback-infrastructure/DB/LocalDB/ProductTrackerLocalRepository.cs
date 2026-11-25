@@ -5,8 +5,8 @@ using Microsoft.Data.Sqlite;
 
 namespace cashback_infrastructure.DB
 {
-    internal class ProductTrackerRepository
-        : SQLiteDBRepo<IProductTrackerEntity>, IProductTrackerRepository
+    internal class ProductTrackerLocalRepository
+        : SQLiteDBRepo<IProductTrackerEntity>, IProductTrackerLocalRepository
     {
         public override async Task DeleteByIDAsync(int? id)
         {
@@ -199,11 +199,11 @@ namespace cashback_infrastructure.DB
 
         public string Name { get; init; }
 
-        public string AdditionalInfo { get; set; }
+        public string? AdditionalInfo { get; set; }
 
         public Dictionary<int, (int Price, string URL)> PricesAtShops { get; init; }
 
-        public DateTime PriceGotAt { get; init; }
+        public DateTime? PriceGotAt { get; init; }
 
         public int? Id { get; init; }
     }

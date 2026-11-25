@@ -1,6 +1,6 @@
 ﻿namespace cashback_domain.Entities
 {
-    public interface IBankCardRepository : ISqLiteDbRepository<IBankCardEntity>
+    public interface IBankCardLocalRepository : ISqLiteDbRepository<IBankCardEntity>
     {
         IAsyncEnumerable<IBankCardEntity> GetAllWithCorrectMCCs(int[] mcc);
     }

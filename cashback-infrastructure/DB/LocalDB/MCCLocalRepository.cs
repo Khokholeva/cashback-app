@@ -4,7 +4,7 @@ using Microsoft.Data.Sqlite;
 
 namespace cashback_infrastructure.DB
 {
-    public class MCCRepository : SQLiteDBRepo<IMCCEntity>, IMCCRepository
+    public class MCCLocalRepository : SQLiteDBRepo<IMCCEntity>, IMCCLocalRepository
     {
         public override async Task DeleteByIDAsync(int? id)
         {
@@ -106,7 +106,7 @@ namespace cashback_infrastructure.DB
         }
 
         public string Name { get; init; }
-        public string Description { get; init; }
+        public string? Description { get; init; }
         public int? Id { get; init; }
     }
 }

@@ -6,7 +6,7 @@ using Microsoft.Data.Sqlite;
 
 namespace cashback_infrastructure.DB
 {
-    public class PromotionRepository : SQLiteDBRepo<IPromotionEntity>, IPromotionRepository
+    public class PromotionLocalRepository : SQLiteDBRepo<IPromotionEntity>, IPromotionLocalRepository
     {
         public override async Task DeleteByIDAsync(int? id)
         {
@@ -178,7 +178,7 @@ namespace cashback_infrastructure.DB
 
         public int? ShopID { get; init; }
 
-        public DateTime ValidUntil { get; init; }
+        public DateTime? ValidUntil { get; init; }
 
         public int? Id { get; init; }
     }

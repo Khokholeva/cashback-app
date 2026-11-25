@@ -1,18 +1,18 @@
-﻿using ZXing.Net.Maui;
+﻿using cashback_domain.Entities.Cards.Discount_Card;
+using ZXing.Net.Maui;
 
 namespace cashback_domain.Entities
 {
     public class DiscountCardEntity : IDiscountCardEntity
     {
-        public DiscountCardEntity(BarcodeResult barcode, int shopID)
+        public DiscountCardEntity(IShopEntity shop)
         {
-            Barcode = barcode;
-            ShopID = shopID;
+            Shop = shop;
         }
 
         public int? Id { get; init; }
-        public BarcodeResult Barcode { get; init; }
-        public int ShopID { get; init; }
+        public BarcodeResult? Barcode { get; set; }
+        public IShopEntity Shop { get; init; }
         public DateTime? NextNotification { get; set; }
     }
 }

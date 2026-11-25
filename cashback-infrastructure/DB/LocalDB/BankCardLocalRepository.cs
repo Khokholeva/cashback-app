@@ -4,8 +4,14 @@ using Microsoft.Data.Sqlite;
 
 namespace cashback_infrastructure.DB
 {
-    public class BankCardRepository : SQLiteDBRepo<IBankCardEntity>, IBankCardRepository
+    public class BankCardLocalRepository : SQLiteDBRepo<IBankCardEntity>, IBankCardLocalRepository
     {
+        private IBankLocalRepository _bankRepo;
+
+        public BankCardLocalRepository(IBankLocalRepository bankRepo)
+        {
+            _bankRepo = bankRepo;
+        }
 
         public override async Task DeleteByIDAsync(int? id)
         {
@@ -45,7 +51,7 @@ namespace cashback_infrastructure.DB
 
             return new BankCardEntityFromDB(
                 mcc_categories,
-                bankId,
+                _bankRepo.FindByIDAsync(bankId).GetAwaiter().GetResult(),
                 additional,
                 cardLimit,
                 lastDigits,
@@ -127,9 +133,9 @@ namespace cashback_infrastructure.DB
 
                 if (entity.Id is not null)
                     cmd.Parameters.AddWithValue("$id", entity.Id);
-                var mccString = string.Join(";", entity.CashBackCategories?.Select(kv => $"{kv.Key}^{kv.Value}"));
+                var mccString = string.Join(";", entity.CashBackCategories.Select(kv => $"{kv.Key}^{kv.Value}"));
                 cmd.Parameters.AddWithValue("$mcc", mccString.Length > 0 ? mccString : DBNull.Value);
-                cmd.Parameters.AddWithValue("$bid", entity.BankId);
+                cmd.Parameters.AddWithValue("$bid", entity.Bank.Id);
                 cmd.Parameters.AddWithValue("$add", (object?)entity.AdditionalInfo ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("$not", DateTime.Now.ToString());
                 cmd.Parameters.AddWithValue("$last", (object?)entity.LastDigits ?? DBNull.Value);
@@ -156,7 +162,7 @@ namespace cashback_infrastructure.DB
     {
         public BankCardEntityFromDB(
             Dictionary<int, int> cashBackCategories,
-            int bankId,
+            IBankEntity bank,
             string additionalInfo,
             int? limit,
             string lastDigits,
@@ -165,7 +171,7 @@ namespace cashback_infrastructure.DB
             int? id)
         {
             CashBackCategories = cashBackCategories;
-            BankId = bankId;
+            Bank = bank;
             AdditionalInfo = additionalInfo;
             Limit = limit;
             LastDigits = lastDigits;
@@ -175,12 +181,12 @@ namespace cashback_infrastructure.DB
         }
 
         public Dictionary<int, int> CashBackCategories { get; init; }
-        public int BankId { get; init; }
-        public string AdditionalInfo { get; set; }
-        public int? Limit { get; set; }
-        public string LastDigits { get; set; }
-        public string Expires { get; set; }
+        public IBankEntity Bank { get; init; }
+        public string? AdditionalInfo { get; set; }
         public DateTime? NextNotification { get; set; }
         public int? Id { get; init; }
+        public int? Limit { get; set; }
+        public string? LastDigits { get; set; }
+        public string? Expires { get; set; }
     }
 }

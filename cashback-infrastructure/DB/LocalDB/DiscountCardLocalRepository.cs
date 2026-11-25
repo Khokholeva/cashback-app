@@ -6,11 +6,15 @@ using ZXing.Net.Maui;
 
 namespace cashback_infrastructure.DB
 {
-    public class DiscountCardRepository : SQLiteDBRepo<IDiscountCardEntity>, IDiscountCardRepository
+    public class DiscountCardLocalRepository : SQLiteDBRepo<IDiscountCardEntity>, IDiscountCardLocalRepository
     {
         private static readonly Dictionary<string, BarcodeFormat> StringToBarcodeType;
+        private readonly IShopLocalRepository _shopRepository;
 
-        static DiscountCardRepository()
+
+
+
+        static DiscountCardLocalRepository()
         {
             StringToBarcodeType = typeof(BarcodeFormat)
                 .GetFields()
@@ -18,6 +22,11 @@ namespace cashback_infrastructure.DB
                 .ToDictionary(
                     field => field.Name,
                     field => (BarcodeFormat)field.GetRawConstantValue());
+        }
+
+        public DiscountCardLocalRepository(IShopLocalRepository shopRepository)
+        {
+            _shopRepository = shopRepository;
         }
 
         public override async Task DeleteByIDAsync(int? id)
@@ -37,28 +46,30 @@ namespace cashback_infrastructure.DB
         private IDiscountCardEntity ReadFromDB(SqliteDataReader reader)
         {
             var id = reader.GetInt32(0);
-            var barcodeValue = reader.GetString(1);              // NOT NULL
-            var barcodeTypeName = reader.GetString(2);           // NOT NULL
+            var barcodeValue = reader.IsDBNull(1) ? null : reader.GetString(1);
+            var barcodeTypeName = reader.IsDBNull(2) ? null : reader.GetString(2);
             var shopId = reader.GetInt32(3);                     // NOT NULL
 
             // BarcodeResult — record с init-свойствами.
             // Конструктора с аргументами нет, поэтому только инициализатор.
-            var barcode = new BarcodeResult
-            {
-                Value = barcodeValue,
-                Format = StringToBarcodeType.TryGetValue(barcodeTypeName, out var fmt)
+            var barcode = barcodeValue is null ?
+                null :
+                new BarcodeResult
+                {
+                    Value = barcodeValue,
+                    Format = StringToBarcodeType.TryGetValue(barcodeTypeName, out var fmt)
                     ? fmt
                     : throw new KeyNotFoundException($"Тип штрихкода {barcodeTypeName} не существует!"),
-            };
+                };
 
             return new DiscountCardEntityFromDB(
-                barcode, 
-                shopId, 
+                barcode,
+                _shopRepository.FindByIDAsync(shopId).GetAwaiter().GetResult(),
                 DateTime.TryParse(
                 reader.GetString(4),
                 CultureInfo.InvariantCulture,
                 DateTimeStyles.RoundtripKind,
-                out var res) ? res : null, 
+                out var res) ? res : null,
                 id);
         }
 
@@ -101,8 +112,8 @@ namespace cashback_infrastructure.DB
             return @"
                 CREATE TABLE IF NOT EXISTS DiscountCards (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
-                    barcode_value TEXT NOT NULL,
-                    barcode_type TEXT NOT NULL,
+                    barcode_value TEXT,
+                    barcode_type TEXT,
                     shop_id INTEGER NOT NULL,
                     notification_date TEXT
                 );
@@ -131,9 +142,12 @@ namespace cashback_infrastructure.DB
                 cmd.Parameters.AddWithValue("$id", entity.Id.Value);
             }
 
-            cmd.Parameters.AddWithValue("$barcode_value", entity.Barcode.Value);
-            cmd.Parameters.AddWithValue("$barcode_type", entity.Barcode.Format.ToString());
-            cmd.Parameters.AddWithValue("$shop_id", entity.ShopID);
+            var barcodeValue = entity.Barcode is null ? DBNull.Value : (object?)entity.Barcode.Value;
+            var barcodeFormat = entity.Barcode is null ? DBNull.Value : (object?)entity.Barcode.Format.ToString();
+
+            cmd.Parameters.AddWithValue("$barcode_value", barcodeValue);
+            cmd.Parameters.AddWithValue("$barcode_type", barcodeFormat);
+            cmd.Parameters.AddWithValue("$shop_id", entity.Shop.Id);
             cmd.Parameters.AddWithValue(
                 "$not",
                 DateTime.Now);
@@ -166,19 +180,19 @@ namespace cashback_infrastructure.DB
     {
         public DiscountCardEntityFromDB(
             BarcodeResult barcode,
-            int shopId,
+            IShopEntity shop,
             DateTime? nextNotification,
             int? id)
         {
             Barcode = barcode;
-            ShopID = shopId;
+            Shop = shop;
             NextNotification = nextNotification;
             Id = id;
         }
 
         public int? Id { get; init; }
-        public BarcodeResult Barcode { get; init; }
-        public int ShopID { get; init; }
+        public BarcodeResult? Barcode { get; set; }
+        public IShopEntity Shop { get; init; }
         public DateTime? NextNotification { get; set; }
     }
 }

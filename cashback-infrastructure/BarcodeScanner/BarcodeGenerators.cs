@@ -1,4 +1,5 @@
-﻿using ZXing.Net.Maui;
+﻿using cashback_domain.Entities.Cards.Discount_Card;
+using ZXing.Net.Maui;
 
 namespace cashback_infrastructure
 {
@@ -18,7 +19,7 @@ namespace cashback_infrastructure
         };
 
         //создает баркод для заданного значения и сохраняет его по заданному имени файла
-        public static async void GenerateBarcodeToFile(string value, string filename)
+        public static async void GenerateEan13BarcodeToFile(string value, string filename)
         {
             var filePath = Path.Combine(FileSystem.AppDataDirectory, filename);
             await BarcodeGenerator.WriteToFileAsync(
@@ -29,7 +30,7 @@ namespace cashback_infrastructure
         }
 
         //создает баркод для значения и пишет его в заданный поток
-        public static async void GenerateBarcodeToSream(string value, Stream stream)
+        public static async void GenerateEan13BarcodeToSream(string value, Stream stream)
         {
             await BarcodeGenerator.WriteToStreamAsync(
               value,
