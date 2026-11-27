@@ -1,5 +1,4 @@
 ﻿using cashback_domain.Entities;
-using cashback_infrastructure.DB.LocalDB;
 using Microsoft.Data.Sqlite;
 using System.Globalization;
 using ZXing.Net.Maui;

@@ -1,6 +1,5 @@
 ﻿
 using cashback_domain.Entities;
-using cashback_infrastructure.DB.LocalDB;
 using Microsoft.Data.Sqlite;
 
 namespace cashback_infrastructure.DB
