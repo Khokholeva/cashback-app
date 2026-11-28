@@ -5,8 +5,10 @@ namespace cashback_domain.Entities
 {
     public interface IDiscountCardEntity : INotificationEntity<int?>
     {
-        public IBarcode? Barcode { get; set; }
-        public IShopEntity Shop { get; init; }
+        public IBarcode? Barcode { get; }
+        public IShopEntity Shop { get; }
+        public string BackGroundColor { get; }
+        public string Name { get; }
 
     }
 }

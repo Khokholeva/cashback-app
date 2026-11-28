@@ -2,9 +2,9 @@
 {
     public interface IProductTrackerEntity : IEntity<int?>
     {
-        public Dictionary<int, (int Price, string URL)> PricesAtShops { get; init; }
-        public DateTime? PriceGotAt { get; init; }
-        string Name { get; init; }
-        string? AdditionalInfo { get; set; }
+        public Dictionary<int, (int Price, string URL)> PricesAtShops { get; }
+        public DateTime? PriceGotAt { get; }
+        string Name { get; }
+        string? AdditionalInfo { get; }
     }
 }
