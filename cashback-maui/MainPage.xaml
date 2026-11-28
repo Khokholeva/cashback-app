@@ -23,7 +23,7 @@
                 Grid.Column="0"
                 Source="cashback_cards_dark.svg"
                 BackgroundColor="Transparent"
-                Padding="0"
+                Padding="5"
                 WidthRequest="12.36"
                 HeightRequest="12.36"
                 Aspect="AspectFit" />
@@ -32,7 +32,7 @@
                 Grid.Column="1"
                 Source="discount_cards_dark.svg"
                 BackgroundColor="Transparent"
-                Padding="0"
+                Padding="5"
                 WidthRequest="17"
                 HeightRequest="16.23"
                 Aspect="AspectFit" />
@@ -41,7 +41,7 @@
                 Grid.Column="2"
                 Source="menu_dark.svg"
                 BackgroundColor="Transparent"
-                Padding="0"
+                Padding="5"
                 WidthRequest="13.91"
                 HeightRequest="9.27"
                 Aspect="AspectFit" />
