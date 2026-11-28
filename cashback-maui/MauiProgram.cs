@@ -16,7 +16,7 @@ namespace cashback_maui
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 })
                 .UseBarcodeReader();
-
+            
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif

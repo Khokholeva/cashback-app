@@ -1,4 +1,6 @@
-﻿using ZXing.Net.Maui;
+﻿using cashback_domain.Entities.Cards.Discount_Card;
+using cashback_infrastructure.DB;
+using ZXing.Net.Maui;
 
 namespace cashback_infrastructure
 {

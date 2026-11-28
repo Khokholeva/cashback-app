@@ -18,4 +18,8 @@
     <ProjectReference Include="..\cashback-infrastructure\cashback-infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Factories\" />
+  </ItemGroup>
+
 </Project>

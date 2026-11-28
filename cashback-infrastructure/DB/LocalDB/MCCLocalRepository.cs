@@ -13,7 +13,7 @@ namespace cashback_infrastructure.DB
             await using var connection = await GetConnection();
             var cmd = connection.CreateCommand();
 
-            cmd.CommandText = "DELETE FROM mcc WHERE code_value = $id";
+            cmd.CommandText = "DELETE FROM mcc WHERE id = $id";
             cmd.Parameters.AddWithValue("$id", id.Value);
 
             await cmd.ExecuteNonQueryAsync();
@@ -21,13 +21,10 @@ namespace cashback_infrastructure.DB
 
         private IMCCEntity ReadFromDB(SqliteDataReader reader)
         {
-            var code = reader.GetInt32(0);                          // INTEGER PRIMARY KEY
-            var name = reader.GetString(1);                         // NOT NULL
-            // description в схеме nullable, но в IMCCEntity — non-nullable string.
-            // Кладём null как в шаблоне; лучше сделать Description → string? в интерфейсе.
-            var description = reader.IsDBNull(2) ? null! : reader.GetString(2);
+            var id = reader.GetInt32(0);
+            var name = reader.GetString(1);
 
-            return new MCCEntityFromDB(name, description, code);
+            return new MCCEntityFromDB(name, id);
         }
 
         public override async Task<IMCCEntity> FindByIDAsync(int? id)
@@ -38,7 +35,7 @@ namespace cashback_infrastructure.DB
             await using var connection = await GetConnection();
             var cmd = connection.CreateCommand();
 
-            cmd.CommandText = "SELECT code_value, name, description FROM mcc WHERE code_value = $id";
+            cmd.CommandText = "SELECT id, name FROM mcc WHERE id = $id";
             cmd.Parameters.AddWithValue("$id", id.Value);
 
             using var reader = await cmd.ExecuteReaderAsync();
@@ -53,7 +50,7 @@ namespace cashback_infrastructure.DB
             await using var connection = await GetConnection();
             var cmd = connection.CreateCommand();
 
-            cmd.CommandText = "SELECT code_value, name, description FROM mcc";
+            cmd.CommandText = "SELECT id, name FROM mcc";
 
             using var reader = await cmd.ExecuteReaderAsync();
             while (await reader.ReadAsync())
@@ -62,34 +59,33 @@ namespace cashback_infrastructure.DB
 
         protected override string GetTableCreationCommand()
         {
-            // Баг в исходном DDL: `code-value` — невалидный идентификатор (`-` = вычитание).
-            // Меняем на snake_case `code_value`, как в остальных таблицах (bank_id, last_digits, ...).
             return @"CREATE TABLE IF NOT EXISTS mcc (
-                code_value INTEGER PRIMARY KEY,
-                name TEXT NOT NULL,
-                description TEXT
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL
             );";
         }
 
         public override async Task SaveAsync(IMCCEntity entity)
         {
-            if (entity.Id is null)
-                throw new ArgumentException(
-                    "MCCEntity.Id (код MCC) должен быть задан!",
-                    nameof(entity));
-
             await using var connection = await GetConnection();
             var cmd = connection.CreateCommand();
 
-            // code_value — INTEGER PRIMARY KEY, значение задаёт вызывающий.
-            // INSERT OR REPLACE покрывает и создание, и обновление одним запросом.
-            cmd.CommandText =
-                "INSERT OR REPLACE INTO mcc (code_value, name, description) " +
-                "VALUES ($code, $name, $desc)";
+            if (entity.Id is null)
+            {
+                cmd.CommandText =
+                    "INSERT INTO mcc (name) " +
+                    "VALUES ($name)";
+            }
+            else
+            {
+                cmd.CommandText =
+                    "UPDATE mcc SET name = $name " +
+                    "WHERE id = $id";
 
-            cmd.Parameters.AddWithValue("$code", entity.Id.Value);
+                cmd.Parameters.AddWithValue("$id", entity.Id.Value);
+            }
+
             cmd.Parameters.AddWithValue("$name", entity.Name);
-            cmd.Parameters.AddWithValue("$desc", (object?)entity.Description ?? DBNull.Value);
 
             await cmd.ExecuteNonQueryAsync();
         }
@@ -97,15 +93,14 @@ namespace cashback_infrastructure.DB
 
     internal class MCCEntityFromDB : IMCCEntity
     {
-        public MCCEntityFromDB(string name, string description, int? id)
+        public MCCEntityFromDB(string name, int? id)
         {
             Name = name;
-            Description = description;
             Id = id;
         }
 
         public string Name { get; init; }
-        public string? Description { get; init; }
+
         public int? Id { get; init; }
     }
 }

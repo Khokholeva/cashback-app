@@ -1,4 +1,5 @@
 ﻿using cashback_domain.Entities;
+using cashback_domain.Entities.Cards.Discount_Card;
 using Microsoft.Data.Sqlite;
 using System.Globalization;
 using ZXing.Net.Maui;
@@ -7,21 +8,7 @@ namespace cashback_infrastructure.DB
 {
     public class DiscountCardLocalRepository : SQLiteDBRepo<IDiscountCardEntity>, IDiscountCardLocalRepository
     {
-        private static readonly Dictionary<string, BarcodeFormat> StringToBarcodeType;
         private readonly IShopLocalRepository _shopRepository;
-
-
-
-
-        static DiscountCardLocalRepository()
-        {
-            StringToBarcodeType = typeof(BarcodeFormat)
-                .GetFields()
-                .Where(field => field.IsLiteral)
-                .ToDictionary(
-                    field => field.Name,
-                    field => (BarcodeFormat)field.GetRawConstantValue());
-        }
 
         public DiscountCardLocalRepository(IShopLocalRepository shopRepository)
         {
@@ -47,19 +34,13 @@ namespace cashback_infrastructure.DB
             var id = reader.GetInt32(0);
             var barcodeValue = reader.IsDBNull(1) ? null : reader.GetString(1);
             var barcodeTypeName = reader.IsDBNull(2) ? null : reader.GetString(2);
-            var shopId = reader.GetInt32(3);                     // NOT NULL
-
-            // BarcodeResult — record с init-свойствами.
-            // Конструктора с аргументами нет, поэтому только инициализатор.
+            var shopId = reader.GetInt32(3);
             var barcode = barcodeValue is null ?
                 null :
-                new BarcodeResult
-                {
-                    Value = barcodeValue,
-                    Format = StringToBarcodeType.TryGetValue(barcodeTypeName, out var fmt)
-                    ? fmt
-                    : throw new KeyNotFoundException($"Тип штрихкода {barcodeTypeName} не существует!"),
-                };
+                new BarcodeFromDB(
+                    barcodeValue,
+                    barcodeTypeName
+                    );
 
             return new DiscountCardEntityFromDB(
                 barcode,
@@ -178,7 +159,7 @@ namespace cashback_infrastructure.DB
     internal class DiscountCardEntityFromDB : IDiscountCardEntity
     {
         public DiscountCardEntityFromDB(
-            BarcodeResult barcode,
+            BarcodeFromDB barcode,
             IShopEntity shop,
             DateTime? nextNotification,
             int? id)
@@ -190,8 +171,20 @@ namespace cashback_infrastructure.DB
         }
 
         public int? Id { get; init; }
-        public BarcodeResult? Barcode { get; set; }
+        public IBarcode? Barcode { get; set; }
         public IShopEntity Shop { get; init; }
         public DateTime? NextNotification { get; set; }
+    }
+
+    internal class BarcodeFromDB : IBarcode
+    {
+        public BarcodeFromDB(string format, string value)
+        {
+            Format = format;
+            Value = value;
+        }
+
+        public string Format { get; init; }
+        public string Value { get; init; }
     }
 }
