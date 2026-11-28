@@ -22,10 +22,9 @@ namespace cashback_infrastructure.DB
         private IBankEntity ReadFromDB(SqliteDataReader reader)
         {
             var id = reader.GetInt32(0);
-            var name = reader.GetString(1);                               // NOT NULL — можно GetString
-            var description = reader.IsDBNull(2) ? null : reader.GetString(2);
+            var name = reader.GetString(1);
 
-            return new BankEntityFromDB(name, description, id);
+            return new BankEntityFromDB(name, id);
         }
 
         public override async Task<IBankEntity> FindByIDAsync(int? id)
@@ -36,7 +35,7 @@ namespace cashback_infrastructure.DB
             await using var connection = await GetConnection();
             var cmd = connection.CreateCommand();
 
-            cmd.CommandText = "SELECT id, name, description FROM Banks WHERE id = $id";
+            cmd.CommandText = "SELECT id, name FROM Banks WHERE id = $id";
             cmd.Parameters.AddWithValue("$id", id.Value);
 
             using var reader = await cmd.ExecuteReaderAsync();
@@ -51,7 +50,7 @@ namespace cashback_infrastructure.DB
             await using var connection = await GetConnection();
             var cmd = connection.CreateCommand();
 
-            cmd.CommandText = "SELECT id, name, description FROM Banks";
+            cmd.CommandText = "SELECT id, name FROM Banks";
 
             using var reader = await cmd.ExecuteReaderAsync();
             while (await reader.ReadAsync())
@@ -62,8 +61,7 @@ namespace cashback_infrastructure.DB
         {
             return @"CREATE TABLE IF NOT EXISTS Banks (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                name TEXT NOT NULL,
-                description TEXT
+                name TEXT NOT NULL
             );";
         }
 
@@ -75,19 +73,18 @@ namespace cashback_infrastructure.DB
             if (entity.Id is null)
             {
                 cmd.CommandText =
-                    "INSERT INTO Banks (name, description) " +
-                    "VALUES ($name, $desc)";
+                    "INSERT INTO Banks (name) " +
+                    "VALUES ($name)";
             }
             else
             {
                 cmd.CommandText =
-                    "UPDATE Banks SET name = $name, description = $desc " +
+                    "UPDATE Banks SET name = $name " +
                     "WHERE id = $id";
                 cmd.Parameters.AddWithValue("$id", entity.Id);
             }
 
             cmd.Parameters.AddWithValue("$name", entity.Name);
-            cmd.Parameters.AddWithValue("$desc", (object?)entity.Description ?? DBNull.Value);
 
             await cmd.ExecuteNonQueryAsync();
         }
@@ -95,15 +92,13 @@ namespace cashback_infrastructure.DB
 
     internal class BankEntityFromDB : IBankEntity
     {
-        public BankEntityFromDB(string name, string? description, int? id)
+        public BankEntityFromDB(string name, int? id)
         {
             Name = name;
-            Description = description;
             Id = id;
         }
 
         public string Name { get; init; }
-        public string? Description { get; init; }
         public int? Id { get; init; }
     }
 }

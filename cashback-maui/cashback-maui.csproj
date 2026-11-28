@@ -72,7 +72,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\cashback-infrastructure\cashback-infrastructure.csproj" />
+		<ProjectReference Include="..\cashback-infrastructure\cashback-infrastructure.csproj">
+			<!-- Указываем, что зависимость всегда собирается под базовый net10.0 -->
+			<SetTargetFramework>TargetFramework=net10.0</SetTargetFramework>
+			<!-- Отключаем передачу транзитивных зависимостей, чтобы не было конфликтов -->
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
 	</ItemGroup>
 
 </Project>

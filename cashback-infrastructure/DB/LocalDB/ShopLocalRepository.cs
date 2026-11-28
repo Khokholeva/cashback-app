@@ -8,7 +8,7 @@ namespace cashback_infrastructure.DB
     {
         private readonly IDiscountCardLocalRepository _discountCardRepository;
         private readonly IMCCLocalRepository _mccRepository;
-        private IBankCardLocalRepository _bankCardRepository;
+        private readonly IBankCardLocalRepository _bankCardRepository;
 
         public ShopLocalRepository(
             IDiscountCardLocalRepository discountCardRepository,
@@ -25,8 +25,13 @@ namespace cashback_infrastructure.DB
             var id = reader.GetInt32(0);
             var name = reader.GetString(1);
 
-            var mainMccId = reader.GetInt32(2);
-            var mainMcc = await _mccRepository.FindByIDAsync(mainMccId);
+            var mainMccId = reader.IsDBNull(2)
+                ? (int?)null
+                : reader.GetInt32(2);
+
+            var mainMcc = mainMccId is null
+                ? null
+                : await _mccRepository.FindByIDAsync(mainMccId);
 
             var possibleMccs = new List<IMCCEntity>();
 
@@ -42,24 +47,26 @@ namespace cashback_infrastructure.DB
                 }
             }
 
-            var briefDescription = reader.IsDBNull(4)
-                ? null
-                : reader.GetString(4);
+            var discountCards = await _discountCardRepository
+                .GetAllShopCards(id)
+                .ToArrayAsync();
 
-            var discountCards = new List<IDiscountCardEntity>();
+            var mccIds = possibleMccs.Select(mcc =>
+                mcc.Id ?? throw new InvalidOperationException(
+                    "У одного из PossibleMCCs отсутствует ID!"))
+                .ToArray();
+
+            var bankCards = await _bankCardRepository
+                    .GetAllWithCorrectMCCs(mccIds)
+                    .ToArrayAsync();
 
             return new ShopEntityFromDB(
                 mainMcc,
                 possibleMccs.ToArray(),
                 name,
-                await _discountCardRepository.GetAllShopCards(id).ToArrayAsync(),
-                briefDescription,
+                discountCards,
                 id,
-                await _bankCardRepository
-                .GetAllWithCorrectMCCs(
-                    possibleMccs.Select(mcc => mcc.Id.Value)
-                    .ToArray()
-                    ).ToArrayAsync()
+                bankCards
             );
         }
 
@@ -89,7 +96,7 @@ namespace cashback_infrastructure.DB
                 var cmd = connection.CreateCommand();
 
                 cmd.CommandText = @"
-                    SELECT id, name, main_mcc, mcc_list, brief_description
+                    SELECT id, name, main_mcc, mcc_list
                     FROM Shops
                     WHERE id = $id";
 
@@ -113,7 +120,7 @@ namespace cashback_infrastructure.DB
                 var cmd = connection.CreateCommand();
 
                 cmd.CommandText = @"
-                    SELECT id, name, main_mcc, mcc_list, brief_description
+                    SELECT id, name, main_mcc, mcc_list
                     FROM Shops";
 
                 using (var reader = await cmd.ExecuteReaderAsync())
@@ -130,12 +137,12 @@ namespace cashback_infrastructure.DB
                 CREATE TABLE IF NOT EXISTS Shops (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     name TEXT NOT NULL,
-                    main_mcc INTEGER NOT NULL,
-                    mcc_list TEXT,
-                    brief_description TEXT
+                    main_mcc INTEGER,
+                    mcc_list TEXT
                 );
 
-                CREATE INDEX IF NOT EXISTS ix_shops_main_mcc ON Shops (main_mcc);";
+                CREATE INDEX IF NOT EXISTS ix_shops_main_mcc
+                ON Shops (main_mcc);";
         }
 
         public override async Task SaveAsync(IShopEntity entity)
@@ -148,9 +155,9 @@ namespace cashback_infrastructure.DB
                 {
                     cmd.CommandText = @"
                         INSERT INTO Shops
-                            (name, main_mcc, mcc_list, brief_description)
+                            (name, main_mcc, mcc_list)
                         VALUES
-                            ($name, $main_mcc, $mcc_list, $brief_description)";
+                            ($name, $main_mcc, $mcc_list)";
                 }
                 else
                 {
@@ -159,14 +166,13 @@ namespace cashback_infrastructure.DB
                         SET
                             name = $name,
                             main_mcc = $main_mcc,
-                            mcc_list = $mcc_list,
-                            brief_description = $brief_description
+                            mcc_list = $mcc_list
                         WHERE id = $id";
 
                     cmd.Parameters.AddWithValue("$id", entity.Id.Value);
                 }
 
-                if (entity.MainMCC.Id is null)
+                if (entity.MainMCC is not null && entity.MainMCC.Id is null)
                     throw new InvalidOperationException(
                         "У MainMCC отсутствует ID!");
 
@@ -177,17 +183,14 @@ namespace cashback_infrastructure.DB
                 var mccString = string.Join(";", mccIds);
 
                 cmd.Parameters.AddWithValue("$name", entity.Name);
+
                 cmd.Parameters.AddWithValue(
                     "$main_mcc",
-                    entity.MainMCC.Id.Value);
+                    (object?)entity.MainMCC?.Id ?? DBNull.Value);
 
                 cmd.Parameters.AddWithValue(
                     "$mcc_list",
                     mccString.Length > 0 ? mccString : DBNull.Value);
-
-                cmd.Parameters.AddWithValue(
-                    "$brief_description",
-                    (object?)entity.BriefDescription ?? DBNull.Value);
 
                 await cmd.ExecuteNonQueryAsync();
             }
@@ -197,11 +200,10 @@ namespace cashback_infrastructure.DB
     internal class ShopEntityFromDB : IShopEntity
     {
         public ShopEntityFromDB(
-            IMCCEntity mainMcc,
+            IMCCEntity? mainMcc,
             IMCCEntity[] possibleMccs,
             string name,
             IDiscountCardEntity[] discountCards,
-            string briefDescription,
             int? id,
             IBankCardEntity[] bankCardsWithShopMCCs)
         {
@@ -209,20 +211,17 @@ namespace cashback_infrastructure.DB
             PossibleMCCs = possibleMccs;
             Name = name;
             DiscountCards = discountCards;
-            BriefDescription = briefDescription;
             Id = id;
             BankCardsWithShopMCCs = bankCardsWithShopMCCs;
         }
 
-        public IMCCEntity MainMCC { get; init; }
+        public IMCCEntity? MainMCC { get; init; }
 
         public IMCCEntity[] PossibleMCCs { get; init; }
 
         public string Name { get; init; }
 
         public IDiscountCardEntity[] DiscountCards { get; init; }
-
-        public string BriefDescription { get; init; }
 
         public int? Id { get; init; }
 

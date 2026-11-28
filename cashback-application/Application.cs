@@ -1,10 +1,6 @@
-﻿using System.Reflection;
-using cashback_application.Factories;
-using cashback_domain.Entities;
+﻿using cashback_domain.Entities;
 using cashback_infrastructure.DB;
 using Ninject;
-using Ninject.Extensions.Conventions;
-using Ninject.Extensions.Factory;
 
 namespace cashback_application
 {

@@ -5,7 +5,7 @@ namespace cashback_domain.Entities
 {
     public interface IDiscountCardEntity : INotificationEntity<int?>
     {
-        public BarcodeResult? Barcode { get; set; }
+        public IBarcode? Barcode { get; set; }
         public IShopEntity Shop { get; init; }
 
     }
