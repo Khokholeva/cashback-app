@@ -3,48 +3,113 @@
 <ContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:views="clr-namespace:cashback_maui.Views"
     x:Class="cashback_maui.MainPage">
 
     <Grid RowDefinitions="*,54">
 
-        <!-- Основное содержимое -->
+        <!-- Контейнер представлений -->
         <ContentView
             x:Name="ContentHost"
             Grid.Row="0" />
 
         <!-- Нижняя навигация -->
         <Grid
+            x:Name="BottomNavigation"
             Grid.Row="1"
-            ColumnDefinitions="*,*,*"
-            BackgroundColor="{StaticResource AppBackground}">
+            ColumnDefinitions="*,*,*">
 
-            <ImageButton
-                Grid.Column="0"
-                Source="cashback_cards_dark.svg"
-                BackgroundColor="Transparent"
-                Padding="5"
-                WidthRequest="12.36"
-                HeightRequest="12.36"
-                Aspect="AspectFit" />
+            <!-- Кэшбэк/банковские карты -->
+            <Grid Grid.Column="0">
 
-            <ImageButton
-                Grid.Column="1"
-                Source="discount_cards_dark.svg"
-                BackgroundColor="Transparent"
-                Padding="5"
-                WidthRequest="17"
-                HeightRequest="16.23"
-                Aspect="AspectFit" />
+                <Ellipse
+                    x:Name="CashbackIndicator"
+                    WidthRequest="42"
+                    HeightRequest="42"
+                    Fill="#252525"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    IsVisible="False" />
 
-            <ImageButton
-                Grid.Column="2"
-                Source="menu_dark.svg"
-                BackgroundColor="Transparent"
-                Padding="5"
-                WidthRequest="13.91"
-                HeightRequest="9.27"
-                Aspect="AspectFit" />
+                <Image
+                    x:Name="CashbackIcon"
+                    Source="cashback_cards_dark.svg"
+                    WidthRequest="12.36"
+                    HeightRequest="12.36"
+                    Aspect="AspectFit"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+
+                <Button
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    Padding="0"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    Clicked="OnCashbacksClicked" />
+
+            </Grid>
+
+            <!-- Дисконтные карты -->
+            <Grid Grid.Column="1">
+
+                <Ellipse
+                    x:Name="DiscountIndicator"
+                    WidthRequest="42"
+                    HeightRequest="42"
+                    Fill="#252525"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    IsVisible="False" />
+
+                <Image
+                    x:Name="DiscountIcon"
+                    Source="discount_cards_dark.svg"
+                    WidthRequest="17"
+                    HeightRequest="16.23"
+                    Aspect="AspectFit"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+
+                <Button
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    Padding="0"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    Clicked="OnDiscountsClicked" />
+
+            </Grid>
+
+            <!-- Меню -->
+            <Grid Grid.Column="2">
+
+                <Ellipse
+                    x:Name="MenuIndicator"
+                    WidthRequest="42"
+                    HeightRequest="42"
+                    Fill="#252525"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    IsVisible="False" />
+
+                <Image
+                    x:Name="MenuIcon"
+                    Source="menu_dark.svg"
+                    WidthRequest="13.91"
+                    HeightRequest="9.27"
+                    Aspect="AspectFit"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+
+                <Button
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    Padding="0"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Fill"
+                    Clicked="OnMenuClicked" />
+
+            </Grid>
 
         </Grid>
 

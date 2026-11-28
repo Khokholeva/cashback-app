@@ -11,17 +11,9 @@
         VerticalOptions="Center">
 
         <Label
-            Text="Cashback App"
-            FontSize="28"
-            FontAttributes="Bold"
-            HorizontalOptions="Center" />
-
-        <Button
-            Text="Добавить карту"
-            BackgroundColor="#F5D547"
-            TextColor="Black"
-            CornerRadius="12" />
-
+            Text="банковские"
+            Style="{StaticResource Headline}" />
+            
     </VerticalStackLayout>
 
 </ContentView>
