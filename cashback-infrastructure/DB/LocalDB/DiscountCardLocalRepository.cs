@@ -1,4 +1,5 @@
-﻿using cashback_domain.Entities;
+﻿
+using cashback_domain.Entities;
 using cashback_domain.Entities.Cards.Discount_Card;
 using Microsoft.Data.Sqlite;
 using System.Globalization;
@@ -35,22 +36,28 @@ namespace cashback_infrastructure.DB
             var barcodeValue = reader.IsDBNull(1) ? null : reader.GetString(1);
             var barcodeTypeName = reader.IsDBNull(2) ? null : reader.GetString(2);
             var shopId = reader.GetInt32(3);
-            var barcode = barcodeValue is null ?
-                null :
-                new BarcodeFromDB(
-                    barcodeValue,
-                    barcodeTypeName
-                    );
+
+            var barcode = barcodeValue is null || barcodeTypeName is null
+                ? null
+                : new BarcodeFromDB(
+                    barcodeTypeName,
+                    barcodeValue
+                );
+
+            var backgroundColor = reader.GetString(5);
+            var name = reader.GetString(6);
 
             return new DiscountCardEntityFromDB(
                 barcode,
                 _shopRepository.FindByIDAsync(shopId).GetAwaiter().GetResult(),
                 DateTime.TryParse(
-                reader.GetString(4),
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.RoundtripKind,
-                out var res) ? res : null,
-                id);
+                    reader.GetString(4),
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.RoundtripKind,
+                    out var res) ? res : null,
+                id,
+                backgroundColor,
+                name);
         }
 
         public override async Task<IDiscountCardEntity> FindByIDAsync(int? id)
@@ -62,8 +69,9 @@ namespace cashback_infrastructure.DB
             var cmd = connection.CreateCommand();
 
             cmd.CommandText =
-                "SELECT id, barcode_value, barcode_type, shop_id, notification_date " +
+                "SELECT id, barcode_value, barcode_type, shop_id, notification_date, background_color, name " +
                 "FROM DiscountCards WHERE id = $id";
+
             cmd.Parameters.AddWithValue("$id", id.Value);
 
             using var reader = await cmd.ExecuteReaderAsync();
@@ -79,7 +87,7 @@ namespace cashback_infrastructure.DB
             var cmd = connection.CreateCommand();
 
             cmd.CommandText =
-                "SELECT id, barcode_value, barcode_type, shop_id, notification_date " +
+                "SELECT id, barcode_value, barcode_type, shop_id, notification_date, background_color, name " +
                 "FROM DiscountCards";
 
             using var reader = await cmd.ExecuteReaderAsync();
@@ -95,7 +103,9 @@ namespace cashback_infrastructure.DB
                     barcode_value TEXT,
                     barcode_type TEXT,
                     shop_id INTEGER NOT NULL,
-                    notification_date TEXT
+                    notification_date TEXT,
+                    background_color TEXT NOT NULL,
+                    name TEXT NOT NULL
                 );
 
                 CREATE INDEX IF NOT EXISTS ix_discountcards_shop ON DiscountCards (shop_id);";
@@ -109,28 +119,35 @@ namespace cashback_infrastructure.DB
             if (entity.Id is null)
             {
                 cmd.CommandText =
-                    "INSERT INTO DiscountCards (barcode_value, barcode_type, shop_id, notification_date) " +
-                    "VALUES ($barcode_value, $barcode_type, $shop_id, $not)";
+                    "INSERT INTO DiscountCards (barcode_value, barcode_type, shop_id, notification_date, background_color, name) " +
+                    "VALUES ($barcode_value, $barcode_type, $shop_id, $not, $background_color, $name)";
             }
             else
             {
                 cmd.CommandText =
                     "UPDATE DiscountCards " +
                     "SET barcode_value = $barcode_value, barcode_type = $barcode_type, " +
-                    "shop_id = $shop_id, notification_date = $not " +
+                    "shop_id = $shop_id, notification_date = $not, background_color = $background_color, " +
+                    "name = $name " +
                     "WHERE id = $id";
+
                 cmd.Parameters.AddWithValue("$id", entity.Id.Value);
             }
 
-            var barcodeValue = entity.Barcode is null ? DBNull.Value : (object?)entity.Barcode.Value;
-            var barcodeFormat = entity.Barcode is null ? DBNull.Value : (object?)entity.Barcode.Format.ToString();
+            var barcodeValue = entity.Barcode is null
+                ? DBNull.Value
+                : (object?)entity.Barcode.Value;
+
+            var barcodeFormat = entity.Barcode is null
+                ? DBNull.Value
+                : (object?)entity.Barcode.Format.ToString();
 
             cmd.Parameters.AddWithValue("$barcode_value", barcodeValue);
             cmd.Parameters.AddWithValue("$barcode_type", barcodeFormat);
             cmd.Parameters.AddWithValue("$shop_id", entity.Shop.Id);
-            cmd.Parameters.AddWithValue(
-                "$not",
-                DateTime.Now);
+            cmd.Parameters.AddWithValue("$not", DateTime.Now);
+            cmd.Parameters.AddWithValue("$background_color", entity.BackGroundColor);
+            cmd.Parameters.AddWithValue("$name", entity.Name);
 
             await cmd.ExecuteNonQueryAsync();
         }
@@ -144,7 +161,7 @@ namespace cashback_infrastructure.DB
             var cmd = connection.CreateCommand();
 
             cmd.CommandText =
-                "SELECT id, barcode_value, barcode_type, shop_id, notification_date " +
+                "SELECT id, barcode_value, barcode_type, shop_id, notification_date, background_color, name " +
                 "FROM DiscountCards WHERE shop_id = $shopID";
 
             cmd.Parameters.AddWithValue("$shopID", shopID.Value);
@@ -159,21 +176,27 @@ namespace cashback_infrastructure.DB
     internal class DiscountCardEntityFromDB : IDiscountCardEntity
     {
         public DiscountCardEntityFromDB(
-            BarcodeFromDB barcode,
+            IBarcode? barcode,
             IShopEntity shop,
             DateTime? nextNotification,
-            int? id)
+            int? id,
+            string backGroundColor,
+            string name)
         {
             Barcode = barcode;
             Shop = shop;
             NextNotification = nextNotification;
             Id = id;
+            BackGroundColor = backGroundColor;
+            Name = name;
         }
 
         public int? Id { get; init; }
         public IBarcode? Barcode { get; set; }
         public IShopEntity Shop { get; init; }
         public DateTime? NextNotification { get; set; }
+        public string BackGroundColor { get; set; }
+        public string Name { get; set; }
     }
 
     internal class BarcodeFromDB : IBarcode

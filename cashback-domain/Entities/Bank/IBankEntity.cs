@@ -2,6 +2,6 @@
 {
     public interface IBankEntity : IEntity<int?>
     {
-        public string Name { get; init; }
+        public string Name { get; }
     }
 }

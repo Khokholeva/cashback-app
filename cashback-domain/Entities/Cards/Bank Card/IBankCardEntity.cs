@@ -2,11 +2,13 @@
 {
     public interface IBankCardEntity : INotificationEntity<int?>
     {
-        public Dictionary<int, int> CashBackCategories { get; init; }
-        public IBankEntity Bank { get; init; }
-        public string? AdditionalInfo { get; set; }
-        public int? Limit { get; set; }
-        public string? LastDigits { get; set; }
-        public string? Expires { get; set; }
+        public Dictionary<int, int> CashBackCategories { get; }
+        public IBankEntity Bank { get; }
+        public string? AdditionalInfo { get; }
+        public int? Limit { get; }
+        public string? LastDigits { get; }
+        public string? Expires { get; }
+        public string BackGroundColor { get; }
+        public string Name { get; }
     }
 }

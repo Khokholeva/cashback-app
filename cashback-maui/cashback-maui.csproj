@@ -78,4 +78,10 @@
 		</ProjectReference>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiXaml Update="Views\DiscountCardListing\DiscountCardListingView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
 </Project>

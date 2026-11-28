@@ -1,4 +1,5 @@
-﻿using cashback_domain.Entities;
+﻿
+using cashback_domain.Entities;
 using Microsoft.Data.Sqlite;
 
 namespace cashback_infrastructure.DB
@@ -16,6 +17,7 @@ namespace cashback_infrastructure.DB
         {
             if (id is null)
                 throw new ArgumentNullException($"{nameof(id)} был NULL!");
+
             using (var connection = await GetConnection())
             {
                 var cmd = connection.CreateCommand();
@@ -41,12 +43,15 @@ namespace cashback_infrastructure.DB
                 })
                 .Where(t => t.Item3)
                 .ToDictionary(t => t.mcc, t => t.cashback);
+
             var bankId = reader.GetInt32(2);
             var additional = reader.IsDBNull(3) ? null : reader.GetString(3);
             var lastDigits = reader.IsDBNull(4) ? null : reader.GetString(4);
             var expires = reader.IsDBNull(5) ? null : reader.GetString(5);
             var cardLimit = reader.IsDBNull(6) ? (int?)null : reader.GetInt32(6);
             var notificationDate = reader.IsDBNull(7) ? null : reader.GetString(7);
+            var backgroundColor = reader.GetString(8);
+            var name = reader.GetString(9);
 
             return new BankCardEntityFromDB(
                 mcc_categories,
@@ -56,18 +61,21 @@ namespace cashback_infrastructure.DB
                 lastDigits,
                 expires,
                 DateTime.TryParse(notificationDate, out var res) ? res : null,
-                id);
+                id,
+                backgroundColor,
+                name);
         }
 
         public override async Task<IBankCardEntity> FindByIDAsync(int? id)
         {
             if (id is null)
                 throw new ArgumentNullException($"{nameof(id)} был NULL!");
+
             using (var connection = await GetConnection())
             {
                 var cmd = connection.CreateCommand();
 
-                cmd.CommandText = $"SELECT id, mcc_categories, bank_id, additional, last_digits, expires, card_limit, notification_date FROM BankCards WHERE id = {id}";
+                cmd.CommandText = $"SELECT id, mcc_categories, bank_id, additional, last_digits, expires, card_limit, notification_date, background_color, name FROM BankCards WHERE id = {id}";
 
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
@@ -85,7 +93,7 @@ namespace cashback_infrastructure.DB
             {
                 var cmd = connection.CreateCommand();
 
-                cmd.CommandText = "SELECT id, mcc_categories, bank_id, additional, last_digits, expires, card_limit, notification_date FROM BankCards";
+                cmd.CommandText = "SELECT id, mcc_categories, bank_id, additional, last_digits, expires, card_limit, notification_date, background_color, name FROM BankCards";
 
                 using (var reader = await cmd.ExecuteReaderAsync())
                 {
@@ -106,7 +114,9 @@ namespace cashback_infrastructure.DB
                     last_digits TEXT,
                     expires TEXT,
                     card_limit INTEGER,
-                    notification_date TEXT
+                    notification_date TEXT,
+                    background_color TEXT NOT NULL,
+                    name TEXT NOT NULL
                 );
 
                 CREATE INDEX IF NOT EXISTS ix_bankcards_bank ON BankCards (bank_id);";
@@ -119,20 +129,24 @@ namespace cashback_infrastructure.DB
                 var cmd = connection.CreateCommand();
                 var idString = entity.Id is not null ? "id, " : string.Empty;
                 var idValueString = entity.Id is not null ? "$id, " : string.Empty;
+
                 if (entity.Id is null)
                     cmd.CommandText =
-                        $"INSERT INTO BankCards (mcc_categories, bank_id, additional, last_digits, expires, card_limit, notification_date) " +
-                        $"VALUES ($mcc, $bid, $add, $last, $exp, $card_limit, $not)";
+                        $"INSERT INTO BankCards (mcc_categories, bank_id, additional, last_digits, expires, card_limit, notification_date, background_color, name) " +
+                        $"VALUES ($mcc, $bid, $add, $last, $exp, $card_limit, $not, $background_color, $name)";
                 else
                     cmd.CommandText =
                         $"UPDATE BankCards " +
                         $"SET mcc_categories = $mcc, bank_id = $bid, additional = $add, last_digits = $last, " +
-                        $"expires = $exp, card_limit = $card_limit, notification_date = $not " +
+                        $"expires = $exp, card_limit = $card_limit, notification_date = $not, " +
+                        $"background_color = $background_color, name = $name " +
                         $"WHERE id = $id";
 
                 if (entity.Id is not null)
                     cmd.Parameters.AddWithValue("$id", entity.Id);
+
                 var mccString = string.Join(";", entity.CashBackCategories.Select(kv => $"{kv.Key}^{kv.Value}"));
+
                 cmd.Parameters.AddWithValue("$mcc", mccString.Length > 0 ? mccString : DBNull.Value);
                 cmd.Parameters.AddWithValue("$bid", entity.Bank.Id);
                 cmd.Parameters.AddWithValue("$add", (object?)entity.AdditionalInfo ?? DBNull.Value);
@@ -140,6 +154,8 @@ namespace cashback_infrastructure.DB
                 cmd.Parameters.AddWithValue("$last", (object?)entity.LastDigits ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("$exp", (object?)entity.Expires ?? DBNull.Value);
                 cmd.Parameters.AddWithValue("$card_limit", (object?)entity.Limit ?? DBNull.Value);
+                cmd.Parameters.AddWithValue("$background_color", entity.BackGroundColor);
+                cmd.Parameters.AddWithValue("$name", entity.Name);
 
                 await cmd.ExecuteNonQueryAsync();
             }
@@ -167,7 +183,9 @@ namespace cashback_infrastructure.DB
             string lastDigits,
             string expires,
             DateTime? nextNotification,
-            int? id)
+            int? id,
+            string backGroundColor,
+            string name)
         {
             CashBackCategories = cashBackCategories;
             Bank = bank;
@@ -177,6 +195,8 @@ namespace cashback_infrastructure.DB
             Expires = expires;
             NextNotification = nextNotification;
             Id = id;
+            BackGroundColor = backGroundColor;
+            Name = name;
         }
 
         public Dictionary<int, int> CashBackCategories { get; init; }
@@ -187,5 +207,7 @@ namespace cashback_infrastructure.DB
         public int? Limit { get; set; }
         public string? LastDigits { get; set; }
         public string? Expires { get; set; }
+        public string BackGroundColor { get; set; }
+        public string Name { get; }
     }
 }
