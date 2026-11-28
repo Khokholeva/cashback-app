@@ -6,11 +6,47 @@
     xmlns:views="clr-namespace:cashback_maui.Views"
     x:Class="cashback_maui.MainPage">
 
-    <Grid>
+    <Grid RowDefinitions="*,54">
 
-        <!-- Контейнер для экранов -->
+        <!-- Основное содержимое -->
         <ContentView
-            x:Name="ContentHost" />
+            x:Name="ContentHost"
+            Grid.Row="0" />
+
+        <!-- Нижняя навигация -->
+        <Grid
+            Grid.Row="1"
+            ColumnDefinitions="*,*,*"
+            BackgroundColor="{StaticResource AppBackground}">
+
+            <ImageButton
+                Grid.Column="0"
+                Source="cashback_cards_dark.svg"
+                BackgroundColor="Transparent"
+                Padding="0"
+                WidthRequest="12.36"
+                HeightRequest="12.36"
+                Aspect="AspectFit" />
+
+            <ImageButton
+                Grid.Column="1"
+                Source="discount_cards_dark.svg"
+                BackgroundColor="Transparent"
+                Padding="0"
+                WidthRequest="17"
+                HeightRequest="16.23"
+                Aspect="AspectFit" />
+
+            <ImageButton
+                Grid.Column="2"
+                Source="menu_dark.svg"
+                BackgroundColor="Transparent"
+                Padding="0"
+                WidthRequest="13.91"
+                HeightRequest="9.27"
+                Aspect="AspectFit" />
+
+        </Grid>
 
     </Grid>
 
